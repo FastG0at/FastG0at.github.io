@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="小白博主搭博客记录参考以下几个资源https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;33616481https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;35668237https:&#x2F;&#x2F;theme-next.iissnan.com&#x2F;getting-started.html Github+Hexo+next宿主机系统: ubuntu 16.04  第一坑, 安装Node.js的时候, u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BlogSetup">
+<meta property="og:url" content="http://yoursite.com/2020/05/05/Kein/BlogSetup/index.html">
+<meta property="og:site_name" content="Seven&#39;s blog">
+<meta property="og:description" content="小白博主搭博客记录参考以下几个资源https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;33616481https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;35668237https:&#x2F;&#x2F;theme-next.iissnan.com&#x2F;getting-started.html Github+Hexo+next宿主机系统: ubuntu 16.04  第一坑, 安装Node.js的时候, u">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588693622/LowVersionNode_yc2wgl.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588693622/social_de-comment_nscg9b.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588694016/Screenshot_from_2020-05-05_17-53-06_wrdk5k.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588696418/Screenshot_from_2020-05-05_18-33-26_m6s4ms.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588701082/Screenshot_from_2020-05-05_19-51-09_qeogvv.png">
+<meta property="article:published_time" content="2020-05-05T09:25:31.000Z">
+<meta property="article:modified_time" content="2020-05-06T06:42:56.828Z">
+<meta property="article:author" content="Seven ♂">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588693622/LowVersionNode_yc2wgl.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"bounceIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/05/Kein/BlogSetup/"/>
+
+
+
+
+
+  <title>BlogSetup | Seven's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Seven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/Kein/BlogSetup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BlogSetup</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T11:25:31+02:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="小白博主搭博客记录"><a href="#小白博主搭博客记录" class="headerlink" title="小白博主搭博客记录"></a>小白博主搭博客记录</h1><h2 id="参考以下几个资源"><a href="#参考以下几个资源" class="headerlink" title="参考以下几个资源"></a>参考以下几个资源</h2><p><a href="https://zhuanlan.zhihu.com/p/33616481" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33616481</a><br><a href="https://zhuanlan.zhihu.com/p/35668237" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35668237</a><br><a href="https://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">https://theme-next.iissnan.com/getting-started.html</a></p>
+<p>Github+Hexo+next<br>宿主机系统: ubuntu 16.04</p>
+<ol>
+<li>第一坑, 安装Node.js的时候, ubuntu16.04不要用 apt-get 安装 nodejs</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs #这样装出来的nodejs版本特别低!与Hexo的版本不相兼容</span><br></pre></td></tr></table></figure>
+
+<p>但我不确定之后会不会改善, 如果不确定的话安装好了node.js可以用命令查看一下版本:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>我显示版本只有5.x.x, 而此刻最新版本是13.x.x</p>
+<p>因此我后来参考了这位<a href="https://blog.kavoori.com/2014-10-13/installing-hexo-on-ubuntu.html" target="_blank" rel="noopener">博主</a>, 安装了更高版本的node.js</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br><span class="line">nvm ls-remote</span><br><span class="line">nvm install V12.7.0 #装好了才看到博文, 有人提到装越新的版本越好, 因为最新版本是用v8 engine写的, 当然我也不知啥是v8, 应该是v型发动机八缸那种存在吧</span><br></pre></td></tr></table></figure>
+
+<p>低版本的hexo就会出现如下问题:</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588693622/LowVersionNode_yc2wgl.png" alt=""></p>
+<p>此时就需要安装更新的版本, 并且在使用时换成较新版的node.js, 我的node.js安装的是v12.7.0</p>
+<p>如下指令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm list</span><br><span class="line">nvm run v12.7.0</span><br></pre></td></tr></table></figure>
+
+<p>如果要一劳永逸, 得把默认的node.js改了:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm alias default v12.7.0</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>第二坑是自己挖的, 在使用next这个主题时, 因为太菜不太懂NexT设计的关键词</li>
+</ol>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588693622/social_de-comment_nscg9b.png" alt="social_de-comment"></p>
+<p>更新社交social联系方式时, social一开始不起效, 因为被注释了, 之前一直是以为冒号输入成中文冒号了.</p>
+<p>如果注释了social, 会提示如下error:</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588694016/Screenshot_from_2020-05-05_17-53-06_wrdk5k.png" alt=""></p>
+<h2 id="网易云音乐插件导入"><a href="#网易云音乐插件导入" class="headerlink" title="网易云音乐插件导入"></a>网易云音乐插件导入</h2><p>采用的是这位大佬的<a href="https://blog.csdn.net/sunshine940326/article/details/69933696" target="_blank" rel="noopener">方法</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	&lt;div id&#x3D;&quot;music163player&quot;&gt;</span><br><span class="line">&lt;iframe frameborder&#x3D;&quot;no&quot; border&#x3D;&quot;0&quot; marginwidth&#x3D;&quot;0&quot; marginheight&#x3D;&quot;0&quot; width&#x3D;330 height&#x3D;120 src&#x3D;&quot;&#x2F;&#x2F;music.163.com&#x2F;outchain&#x2F;player?type&#x3D;0&amp;id&#x3D;5004636762&amp;auto&#x3D;0&amp;height&#x3D;430&quot;&gt;&lt;&#x2F;iframe&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>用网易云音乐生成外链, 添加到 themes\next\layout\_macro  中的sidebar.swig中即可.</p>
+<p>##　连接购买的域名</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588696418/Screenshot_from_2020-05-05_18-33-26_m6s4ms.png" alt=""></p>
+<p>除了github一边需要生成外，域名方也要设置正确，上图是godaddy的ＤＮＳ处设置的．</p>
+<h2 id="最大的坑"><a href="#最大的坑" class="headerlink" title="最大的坑"></a>最大的坑</h2><p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588701082/Screenshot_from_2020-05-05_19-51-09_qeogvv.png" alt=""></p>
+<p>这三个图标只要一点进去, 显示一直都是有问题, 报出的错误类似是:</p>
+<p>Cannot GET /%20/ HOME</p>
+<p>后来找到<a href="https://www.jianshu.com/p/b671e4082c13" target="_blank" rel="noopener">这篇</a>, 才发现默认clone的NexT配置文件, 在menu一览的是有bug的, 比如网站点击categories, 配置文件get的值是categories%20, 每一个get值后面都多带了空格, 因此把主题配置文件下的menu处, 改成下面即可.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/||home</span></span><br><span class="line">  <span class="comment">#about: /about/||user</span></span><br><span class="line">  <span class="comment">#tags: /tags/||tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/||th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/||calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml||sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/||heartbeat</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>虽然基本上整整花了一天时间, 整体跟毛坯房一样, 但是以后总算有地方可以记录了.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/05/OvertheWire/Bandit12-17/" rel="next" title="Bandit 12-17">
+                <i class="fa fa-chevron-left"></i> Bandit 12-17
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/05/CommandForBlog/" rel="prev" title="CommandForBlog">
+                CommandForBlog <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.JPG"
+                alt="Seven ♂" />
+            
+              <p class="site-author-name" itemprop="name">Seven ♂</p>
+              <p class="site-description motion-element" itemprop="description">Try harder</p>
+          </div>
+
+	<div id="music163player">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=120 src="//music.163.com/outchain/player?type=0&id=5004636762&auto=0&height=430"></iframe>
+	</div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/FastG0at" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:st164478@stud.uni-stuttgart.de" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#小白博主搭博客记录"><span class="nav-number">1.</span> <span class="nav-text">小白博主搭博客记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考以下几个资源"><span class="nav-number">1.1.</span> <span class="nav-text">参考以下几个资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网易云音乐插件导入"><span class="nav-number">1.2.</span> <span class="nav-text">网易云音乐插件导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最大的坑"><span class="nav-number">1.3.</span> <span class="nav-text">最大的坑</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Seven ♂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2020/05/05/Kein/BlogSetup/';
+          this.page.identifier = '2020/05/05/Kein/BlogSetup/';
+          this.page.title = 'BlogSetup';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://disqus_eaniNzpdiO.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shell,linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上一次到进入level22 结束 密码是 Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI Bandit 22-23Level GoalA program is running automatically at regular intervals from cron, the time-based job scheduler. Look in &#x2F;etc&#x2F;cron.d&#x2F; for th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bandit22-34">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/OvertheWire/Bandit22-34/index.html">
+<meta property="og:site_name" content="Seven&#39;s blog">
+<meta property="og:description" content="上一次到进入level22 结束 密码是 Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI Bandit 22-23Level GoalA program is running automatically at regular intervals from cron, the time-based job scheduler. Look in &#x2F;etc&#x2F;cron.d&#x2F; for th">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588851553/Screenshot_from_2020-05-07_13-35-05_fbyprh.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588852335/Screenshot_from_2020-05-07_13-50-37_oekqgo.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588852425/Screenshot_from_2020-05-07_13-51-56_l7qmij.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588851553/Screenshot_from_2020-05-07_13-35-05_fbyprh.png">
+<meta property="og:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588865841/Screenshot_from_2020-05-07_17-37-04_jqpgv2.png">
+<meta property="article:published_time" content="2020-05-06T17:13:18.000Z">
+<meta property="article:modified_time" content="2020-05-07T22:36:27.413Z">
+<meta property="article:author" content="Seven ♂">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588851553/Screenshot_from_2020-05-07_13-35-05_fbyprh.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"bounceIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/06/OvertheWire/Bandit22-34/"/>
+
+
+
+
+
+  <title>Bandit22-34 | Seven's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Seven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/OvertheWire/Bandit22-34/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Bandit22-34</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-06T19:13:18+02:00">
+                2020-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OvertheWire/" itemprop="url" rel="index">
+                    <span itemprop="name">OvertheWire</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上一次到进入level22 结束</p>
+<p>密码是</p>
+<p>Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</p>
+<h1 id="Bandit-22-23"><a href="#Bandit-22-23" class="headerlink" title="Bandit 22-23"></a>Bandit 22-23</h1><h2 id="Level-Goal"><a href="#Level-Goal" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>A program is running automatically at regular intervals from <strong>cron</strong>, the time-based job scheduler. Look in <strong>/etc/cron.d/</strong> for the configuration and see what command is being executed.</p>
+<p><strong>NOTE:</strong> Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.</p>
+<p>之前看到提示1以为要写脚本, 后来发现看成23-24了, 哎 ,浪费了好久时间在权限尝试上</p>
+<p>所以还是按照上一题的思路先看看: </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:~$ cd /etc/cron.d</span><br><span class="line">bandit22@bandit:/etc/cron.d$ ls</span><br><span class="line">atop  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24</span><br><span class="line">bandit22@bandit:/etc/cron.d$ cat cronjob_bandit23</span><br><span class="line">@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &amp;&gt; /dev/null</span><br><span class="line">* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &amp;&gt; /dev/null</span><br><span class="line">bandit22@bandit:/etc/cron.d$ cat /usr/bin/cron</span><br><span class="line">cronjob_bandit22.sh  cronjob_bandit24.sh  </span><br><span class="line">cronjob_bandit23.sh  crontab              </span><br><span class="line">bandit22@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit23.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">myname=$(whoami)</span><br><span class="line">mytarget=$(<span class="built_in">echo</span> I am user <span class="variable">$myname</span> | md5sum | cut -d <span class="string">' '</span> -f 1)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Copying passwordfile /etc/bandit_pass/<span class="variable">$myname</span> to /tmp/<span class="variable">$mytarget</span>"</span></span><br><span class="line"></span><br><span class="line">cat /etc/bandit_pass/<span class="variable">$myname</span> &gt; /tmp/<span class="variable">$mytarget</span></span><br></pre></td></tr></table></figure>
+
+<p>再运行了这个脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span><span class="string">"bandit22"</span>|usr/bin/cronjob_bandit23.sh</span><br><span class="line">-bash: echobandit22: <span class="built_in">command</span> not found <span class="comment">#报错</span></span><br><span class="line">Copying passwordfile /etc/bandit_pass/bandit22 to /tmp/8169b67bd894ddbb4412f91573b38db3</span><br></pre></td></tr></table></figure>
+
+<p>等等, 再去相应文件去打开:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:~$ cat /tmp/8169b67bd894ddbb4412f91573b38db3</span><br><span class="line">Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</span><br></pre></td></tr></table></figure>
+
+<p>这不是上一题的秘钥吗, 等于其实要做的就是传一个argument进去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/etc/cron.d$ whoami</span><br><span class="line">bandit22</span><br></pre></td></tr></table></figure>
+
+<p>要做的就是更改myname的值为bandit23, 可是遇到各种权限问题,</p>
+<p>直接用shell写吧, sh文件里的$符号后的就是命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1</span><br><span class="line">8ca319486bfbbc3663ea0fbe81326349</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/$ echo "Copying passwordfile /etc/bandit_pass/bandit23 to /tmp/8ca319486bfbbc3663ea0fbe81326349"</span><br><span class="line">Copying passwordfile /etc/bandit_pass/bandit23 to /tmp/8ca319486bfbbc3663ea0fbe81326349</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349</span><br><span class="line">jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n</span><br></pre></td></tr></table></figure>
+
+<p>Got you!</p>
+<h1 id="Bandit-23-24"><a href="#Bandit-23-24" class="headerlink" title="Bandit 23-24"></a>Bandit 23-24</h1><h2 id="Level-Goal-1"><a href="#Level-Goal-1" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>A program is running automatically at regular intervals from <strong>cron</strong>, the time-based job scheduler. Look in <strong>/etc/cron.d/</strong> for the configuration and see what command is being executed.</p>
+<p><strong>NOTE:</strong> This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!</p>
+<p><strong>NOTE 2:</strong> Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…</p>
+<p>一上来显示常规三板斧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bandit23@bandit:~$ ls</span><br><span class="line">bandit23@bandit:~$ ls -a</span><br><span class="line">.  ..  .bash_logout  .bashrc  .profile</span><br><span class="line">bandit23@bandit:~$ cd /etc/cron.d</span><br><span class="line">bandit23@bandit:/etc/cron.d$ ls</span><br><span class="line">atop  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24</span><br><span class="line">bandit23@bandit:/etc/cron.d$ cat cronjob_bandit24</span><br><span class="line">@reboot bandit24 /usr/bin/cronjob_bandit24.sh &amp;&gt; /dev/null</span><br><span class="line">* * * * * bandit24 /usr/bin/cronjob_bandit24.sh &amp;&gt; /dev/null</span><br><span class="line">bandit23@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit24.sh</span><br></pre></td></tr></table></figure>
+<p>打开的脚本如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">myname=$(whoami)</span><br><span class="line">cd /var/spool/$myname</span><br><span class="line">echo "Executing and deleting all scripts in /var/spool/$myname:"</span><br><span class="line">for i in * .*;</span><br><span class="line">do</span><br><span class="line">    if [ "$i" != "." -a "$i" != ".." ];</span><br><span class="line">    then</span><br><span class="line">	echo "Handling $i"</span><br><span class="line">	timeout -s 9 60 ./$i</span><br><span class="line">	rm -f ./$i</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>脚本表示会执行/var/spool/$myname下的脚本并定期删除所有文件:</p>
+<p>经过前期的实验, 知道密码是在/etc/bandit_pass/bandit24 这里, 需要利用cron这种周期执行的机制, 把该秘钥的文件拷贝出来.</p>
+<ol>
+<li><p>建立新的文件夹, sh脚本以及密码储存文档</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/bersi</span><br><span class="line">touch /tmp/bersi/bersi.sh</span><br><span class="line">touch /tmp/bersi/password</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件都开放权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /tmp/bersi/bersi.sh</span><br><span class="line">chmod 777 /tmp/bersi/password</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑sh脚本, 并指定到周期运行的文件夹下, 重定向的命令还挺好用的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">bersi.sh中内容</span></span><br><span class="line">cat /etc/bandit_pass/bandit24 &gt; /tmp/bersi/password</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit23@bandit:/tmp/bersi$ cp bersi.sh /var/spool/bandit24/</span><br></pre></td></tr></table></figure>
+
+<p>最后拿到密码</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit23@bandit:&#x2F;tmp&#x2F;bersi$ cat password</span><br></pre></td></tr></table></figure>
+
+<p>UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</p>
+<p>UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</p>
+<p>本题就是要联系上面两题, 知道密码放置的位置.</p>
+<h1 id="Bandit-Level-24-→-Level-25-not-solved"><a href="#Bandit-Level-24-→-Level-25-not-solved" class="headerlink" title="Bandit Level 24 → Level 25(not solved)"></a>Bandit Level 24 → Level 25(not solved)</h1><h2 id="Level-Goal-2"><a href="#Level-Goal-2" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bandit24@bandit:~$ nc localhost 30002</span><br><span class="line">I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.</span><br><span class="line">UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ 1111</span><br><span class="line">Wrong! Please enter the correct pincode. Try again.</span><br></pre></td></tr></table></figure>
+
+<p>这题,自己的做法是:</p>
+<p>写了一个生成0-10000的脚本, 脚本用来生成10000行</p>
+<p>UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ 1111</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">password=UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</span><br><span class="line">for a in &#123;0..9&#125;</span><br><span class="line">do</span><br><span class="line">	for b in &#123;0..9&#125;</span><br><span class="line">	do</span><br><span class="line">		for c in &#123;0..9&#125;</span><br><span class="line">		do</span><br><span class="line">			for d in &#123;0..9&#125;</span><br><span class="line">			do</span><br><span class="line">				echo $password $a$b$c$d&gt;&gt; passlist</span><br><span class="line">			done</span><br><span class="line">		done</span><br><span class="line">	done			</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>用10000行这个数据, 再进行测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat passlist |nc localhost 30002</span><br></pre></td></tr></table></figure>
+
+
+
+<p>但是! 是一直timeout, 这几天也有人问<a href="https://unix.stackexchange.com/questions/584070/why-does-my-bash-script-stop-and-say-timeout-exiting" target="_blank" rel="noopener">同样的问题</a>,过段时间再试试. 说不定有搞破坏的把correct的密码删了, 毕竟跟writeup的方法也一样啊, 不对还是太菜了.<br>uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG</p>
+<h1 id="Bandit-Level-25-→-Level-26"><a href="#Bandit-Level-25-→-Level-26" class="headerlink" title="Bandit Level 25 → Level 26"></a>Bandit Level 25 → Level 26</h1><h2 id="Level-Goal-3"><a href="#Level-Goal-3" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not <strong>/bin/bash</strong>, but something else. Find out what it is, how it works and how to break out of it.</p>
+<p>fairly easy…注意审题, 这里有三个点,</p>
+<p>先登录, 果然登录上去就看到有一个sshkey的秘钥, 那直接用命令连接26呗:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo ssh -i /home/xusong/temp/bandit26.sshkey bandit26@bandit.labs.overthewire.org -p 2220</span></span><br></pre></td></tr></table></figure>
+
+<p>一进去就会被断开:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection to bandit.labs.overthewire.org closed.</span><br></pre></td></tr></table></figure>
+
+<p>用ssh后面加command的方法也不行, 确实题目上也说了,  bandit26 is not <strong>/bin/bash</strong> 执行不了shell的指令.</p>
+<p>怎么办, 毫无头绪只有google思路了.</p>
+<ol>
+<li>求助后, 回到bandit25, 此时去查看/etc/passwd</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br><span class="line">bandit22:x:11022:11022:bandit level 22:/home/bandit22:/bin/bash</span><br><span class="line">bandit23:x:11023:11023:bandit level 23:/home/bandit23:/bin/bash</span><br><span class="line">bandit24:x:11024:11024:bandit level 24:/home/bandit24:/bin/bash</span><br><span class="line">bandit25:x:11025:11025:bandit level 25:/home/bandit25:/bin/bash</span><br><span class="line">bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext</span><br><span class="line">bandit27:x:11027:11027:bandit level 27:/home/bandit27:/bin/bash</span><br><span class="line">bandit28:x:11028:11028:bandit level 28:/home/bandit28:/bin/bash</span><br><span class="line">bandit29:x:11029:11029:bandit level 29:/home/bandit29:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>人群中一眼就看得到, 再细看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat: '/home/bandit26:/usr/bin/showtext': No such file or directory</span><br><span class="line">bandit25@bandit:/etc$ cat /usr/bin/showtext</span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"></span><br><span class="line">export TERM=linux</span><br><span class="line"></span><br><span class="line">more ~/text.txt</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
+<p>搜一搜啥意思, </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh <span class="comment">#是指此脚本使用/bin/sh来解释执行，#! 是特殊的表示符，其后面跟的是解释此脚本的shell的路径</span></span></span><br><span class="line">export TERM=linux #TERM=xterm &lt;== 这个终端机使用的环境是什么类型 </span><br><span class="line">more ~/text.txt #more a file</span><br><span class="line">exit 0 #就退出了</span><br></pre></td></tr></table></figure>
+
+<p>但如何能够使用shell呢?</p>
+<ol start="2">
+<li><p>继续求助</p>
+<p>more是可以执行命令的, 还必须得触发more的情况下, 再输入command.</p>
+<p>如何触发more?需要把窗口设置小一些:</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588851553/Screenshot_from_2020-05-07_13-35-05_fbyprh.png" alt=""></p>
+</li>
+</ol>
+<p>此时按v调用vi编辑器, 通过!command来执行命令, 可惜也不行.</p>
+<ol start="3">
+<li><p>再次偷瞄</p>
+<p>需要用:e file的方法, 切换到其他文件, 因为我们知道密码都是在/etc/bandit_pass/bandit26</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588852335/Screenshot_from_2020-05-07_13-50-37_oekqgo.png" alt=""></p>
+</li>
+</ol>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588852425/Screenshot_from_2020-05-07_13-51-56_l7qmij.png" alt=""></p>
+<p>5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z</p>
+<p>fairly easy, funny mud pee!</p>
+<h1 id="Bandit-Level-26-→-Level-27"><a href="#Bandit-Level-26-→-Level-27" class="headerlink" title="Bandit Level 26 → Level 27"></a>Bandit Level 26 → Level 27</h1><h2 id="Level-Goal-4"><a href="#Level-Goal-4" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>Good job getting a shell! Now hurry and grab the password for bandit27!</p>
+<p>本以为有了上一关的密码. 在登录bandit26就会有shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection to bandit.labs.overthewire.org closed.</span><br></pre></td></tr></table></figure>
+
+<p>closed是几个意思. 那这个密码有什么用..充其量就是连接bandit26的时候少输入几个参数?</p>
+<p>再次回到level 25.5 more 后, 拿到vim的阶段.</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588851553/Screenshot_from_2020-05-07_13-35-05_fbyprh.png" alt=""></p>
+<p>还有一种设置shell的方式, 在vim下顺序输入:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:set shell=/bin/bash</span><br><span class="line">:shell</span><br><span class="line">bandit26@bandit:~$ whoami</span><br><span class="line">bandit26 #finally</span><br></pre></td></tr></table></figure>
+
+<p>再在目录发现了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit26@bandit:~$ ls</span><br><span class="line">bandit27-do  text.txt</span><br></pre></td></tr></table></figure>
+
+<p>text.txt没有用, 试试运行bandit27-do:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bandit26@bandit:~$ ./bandit27-do</span><br><span class="line">Run a command as another user.</span><br><span class="line">  Example: ./bandit27-do id</span><br></pre></td></tr></table></figure>
+
+<p>相当于可以冒充bandit27了, 那就去对应的保险柜拿密码吧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27</span><br><span class="line">3ba3118a22e93127a4ed485be72ef5ea</span><br></pre></td></tr></table></figure>
+
+<h1 id="Bandit-Level-27-→-Level-28"><a href="#Bandit-Level-27-→-Level-28" class="headerlink" title="Bandit Level 27 → Level 28"></a>Bandit Level 27 → Level 28</h1><h2 id="Level-Goal-5"><a href="#Level-Goal-5" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>There is a git repository at <code>ssh://bandit27-git@localhost/home/bandit27-git/repo</code>. The password for the user <code>bandit27-git</code> is the same as for the user <code>bandit27</code>.</p>
+<p>Clone the repository and find the password for the next level.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bandit27@bandit:~$ cd /tmp</span><br><span class="line">bandit27@bandit:/tmp$ mkdir seven</span><br><span class="line">bandit27@bandit:/tmp$ chmod 777 seven</span><br><span class="line">bandit27@bandit:/tmp$ cd seven</span><br><span class="line">bandit27@bandit:/tmp/seven$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit27-git@localhost's password: </span><br><span class="line"><span class="meta">#</span><span class="bash">题目描述了, 密码就是Level27的开机密码</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bandit27@bandit:/tmp/seven$ ls -la</span><br><span class="line">bandit27@bandit:/tmp/seven/repo$ cat README </span><br><span class="line">The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2</span><br></pre></td></tr></table></figure>
+
+<p>0ef186ac70e04ea33b4c1853d2526fa2</p>
+<p>这题不难</p>
+<h1 id="Bandit-Level-28-→-Level-29"><a href="#Bandit-Level-28-→-Level-29" class="headerlink" title="Bandit Level 28 → Level 29"></a>Bandit Level 28 → Level 29</h1><h2 id="Level-Goal-6"><a href="#Level-Goal-6" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>前面与之前一模一样, 但打开readme后, 密码是xxxxxxxx隐藏的;</p>
+<p>盲猜看log</p>
+<p>果然</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit28@bandit:/tmp/seven2/repo$ git log</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">commit 073c27c130e6ee407e12faad1dd3848a110c4f95</span><br><span class="line">Author: Morla Porla &lt;morla@overthewire.org&gt;</span><br><span class="line">Date:   Tue Oct 16 14:00:39 2018 +0200</span><br><span class="line"></span><br><span class="line">    fix info leak</span><br><span class="line"></span><br><span class="line">commit 186a1038cc54d1358d42d468cdc8e3cc28a93fcb</span><br><span class="line">Author: Morla Porla &lt;morla@overthewire.org&gt;</span><br><span class="line">Date:   Tue Oct 16 14:00:39 2018 +0200</span><br><span class="line"></span><br><span class="line">    add missing data</span><br><span class="line"></span><br><span class="line">commit b67405defc6ef44210c53345fc953e6a21338cc7</span><br><span class="line">Author: Ben Dover &lt;noone@overthewire.org&gt;</span><br><span class="line">Date:   Tue Oct 16 14:00:39 2018 +0200</span><br><span class="line"></span><br><span class="line">    initial commit of README.md</span><br></pre></td></tr></table></figure>
+
+<p>有一条    fix info leak , 但是找了半天man也没有发现哪条指令可以看指定的这一条, ./git/logs这个文件夹翻遍了也没有找到.</p>
+<p>找到了这篇<a href="https://blog.csdn.net/daguanjia11/article/details/73823617" target="_blank" rel="noopener">文章</a>, 果然是大道至简啊, <code>git show [comit的id号就行了]</code></p>
+<p>bbc96594b4e001778eee9975372716b2</p>
+<h1 id="Bandit-Level-29-→-Level-30"><a href="#Bandit-Level-29-→-Level-30" class="headerlink" title="Bandit Level 29 → Level 30"></a>Bandit Level 29 → Level 30</h1><h2 id="Level-Goal-7"><a href="#Level-Goal-7" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>There is a git repository at <code>ssh://bandit29-git@localhost/home/bandit29-git/repo</code>. The password for the user <code>bandit29-git</code> is the same as for the user <code>bandit29</code></p>
+<p>继续.</p>
+<p>这次打开readme, 里面显示没有密码.</p>
+<p>找了下思路, <a href="https://www.youtube.com/watch?v=68CMwz3wMRE" target="_blank" rel="noopener">莫烦兄弟讲的挺好的</a>, 可以, 用<code>git show-branch --all</code>显示所有branch结构</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588865841/Screenshot_from_2020-05-07_17-37-04_jqpgv2.png" alt=""></p>
+<p>看到silly, shit and giggles 这些关键词, 意味着方向没错.</p>
+<p>看来必须要切换到这些分支下面, 找了下关键词:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout origin/sploits-dev</span><br></pre></td></tr></table></figure>
+
+<p>然后看看log更改信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log -p</span><br></pre></td></tr></table></figure>
+
+<p>找到密码</p>
+<p>5b90576bedb2cc04c86a9e924ce42faf</p>
+<h1 id="Bandit-Level-30-→-Level-31"><a href="#Bandit-Level-30-→-Level-31" class="headerlink" title="Bandit Level 30 → Level 31"></a>Bandit Level 30 → Level 31</h1><h2 id="Level-Goal-8"><a href="#Level-Goal-8" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>git还有一个特性, 是可以给比如一些版本加tag, 比如v1.0什么的</p>
+<p>how to use git tag?</p>
+<figure class="highlight plain"><figcaption><span>tag```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这样就会显示当前的tag, 发现里面有一个叫secret~</span><br><span class="line"></span><br><span class="line">注意我们在建立tag的时候, 只需要 &#96;&#96;&#96;git tag 我是名字&#96;&#96;&#96;就可以建立一个tag</span><br><span class="line"></span><br><span class="line">也可以用&#96;&#96;&#96;git tag 特朗普 -m &quot;又名特建国&quot;&#96;&#96;&#96;,这样就可以给tag加附加信息</span><br><span class="line"></span><br><span class="line">猜测应该是在建立tag的时候, 附件了密码信息</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;shell</span><br><span class="line">bandit30@bandit:&#x2F;tmp&#x2F;seven23&#x2F;repo$ git show secret</span><br><span class="line">warning: refname &#39;secret&#39; is ambiguous.</span><br><span class="line">47e603bb428404d265f59c42920d81e5</span><br></pre></td></tr></table></figure>
+
+<p>ach so.</p>
+<p>47e603bb428404d265f59c42920d81e5</p>
+<h1 id="Bandit-Level-31-→-Level-32"><a href="#Bandit-Level-31-→-Level-32" class="headerlink" title="Bandit Level 31 → Level 32"></a>Bandit Level 31 → Level 32</h1><h2 id="Level-Goal-9"><a href="#Level-Goal-9" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>There is a git repository at <code>ssh://bandit31-git@localhost/home/bandit31-git/repo</code>. The password for the user <code>bandit31-git</code> is the same as for the user <code>bandit31</code>.</p>
+<p>上来还是三板斧, 看到README.MD</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bandit31@bandit:/tmp/seven31/repo$ cat README.md </span><br><span class="line">This time your task is to push a file to the remote repository.</span><br><span class="line">Details:</span><br><span class="line">    File name: key.txt</span><br><span class="line">    Content: 'May I come in?'</span><br><span class="line">    Branch: master</span><br></pre></td></tr></table></figure>
+
+<p>这次需要项目中, 更改修订用git的方式去完成</p>
+<p>回忆的大概流程, 可能不是完全准确:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">touch key.txt</span><br><span class="line">vim key.txt #里面再编辑,注意编辑内容就不要加引号了</span><br><span class="line"><span class="meta">#</span><span class="bash">or</span></span><br><span class="line">echo "May I come in?" &gt; key.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add key.txt</span><br><span class="line">rm .gitignore#这个文件会影响文件的add</span><br><span class="line">git status #期间可以一直用这个命令看状态</span><br><span class="line">git commit -m "whatever"</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote#拿到remote的名字,返回的origin</span><br><span class="line">git push origin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">bandit31-git@localhost&#39;s password: </span><br><span class="line">Counting objects: 6, done.</span><br><span class="line">Delta compression using up to 2 threads.</span><br><span class="line">Compressing objects: 100% (4&#x2F;4), done.</span><br><span class="line">Writing objects: 100% (6&#x2F;6), 535 bytes | 0 bytes&#x2F;s, done.</span><br><span class="line">Total 6 (delta 1), reused 0 (delta 0)</span><br><span class="line">remote: ### Attempting to validate files... ####</span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br><span class="line">remote: Well done! Here is the password for the next level:</span><br><span class="line">remote: 56a9bf19c63d650ce78e6ec0354ee45e#夜空中最亮的星</span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br><span class="line">remote: Wrong!</span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="Bandit-Level-32-→-Level-33"><a href="#Bandit-Level-32-→-Level-33" class="headerlink" title="Bandit Level 32 → Level 33"></a>Bandit Level 32 → Level 33</h1><h2 id="Level-Goal-10"><a href="#Level-Goal-10" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>After all this <code>git</code> stuff its time for another escape. Good luck!</p>
+<p>Welcome to uppercase world..</p>
+<blockquote>
+<blockquote>
+<p>ls<br>sh: 1: LS: not found</p>
+</blockquote>
+</blockquote>
+<p>果然全是大写, 执行variable <code>$0</code> 可以回到普通shell</p>
+<p><code>$ cat /etc/bandit_pass/bandit33</code><br>c9c3199ddf4121b10cf581a98d51caee</p>
+<p>做了一天好累</p>
+<h1 id="Bandit-Level-33-→-Level-34"><a href="#Bandit-Level-33-→-Level-34" class="headerlink" title="Bandit Level 33 → Level 34"></a>Bandit Level 33 → Level 34</h1><p><strong>At this moment, level 34 does not exist yet.</strong></p>
+<p>这不是巧了吗这不是 </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/06/%E7%AC%A6%E5%8F%B7/" rel="next" title="符号">
+                <i class="fa fa-chevron-left"></i> 符号
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/07/SP/Submission1/" rel="prev" title="submission1_sp">
+                submission1_sp <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.JPG"
+                alt="Seven ♂" />
+            
+              <p class="site-author-name" itemprop="name">Seven ♂</p>
+              <p class="site-description motion-element" itemprop="description">Try harder</p>
+          </div>
+
+	<div id="music163player">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=120 src="//music.163.com/outchain/player?type=0&id=5004636762&auto=0&height=430"></iframe>
+	</div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/FastG0at" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:st164478@stud.uni-stuttgart.de" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-22-23"><span class="nav-number">1.</span> <span class="nav-text">Bandit 22-23</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal"><span class="nav-number">1.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-23-24"><span class="nav-number">2.</span> <span class="nav-text">Bandit 23-24</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-1"><span class="nav-number">2.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-24-→-Level-25-not-solved"><span class="nav-number">3.</span> <span class="nav-text">Bandit Level 24 → Level 25(not solved)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-2"><span class="nav-number">3.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-25-→-Level-26"><span class="nav-number">4.</span> <span class="nav-text">Bandit Level 25 → Level 26</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-3"><span class="nav-number">4.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-26-→-Level-27"><span class="nav-number">5.</span> <span class="nav-text">Bandit Level 26 → Level 27</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-4"><span class="nav-number">5.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-27-→-Level-28"><span class="nav-number">6.</span> <span class="nav-text">Bandit Level 27 → Level 28</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-5"><span class="nav-number">6.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-28-→-Level-29"><span class="nav-number">7.</span> <span class="nav-text">Bandit Level 28 → Level 29</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-6"><span class="nav-number">7.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-29-→-Level-30"><span class="nav-number">8.</span> <span class="nav-text">Bandit Level 29 → Level 30</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-7"><span class="nav-number">8.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-30-→-Level-31"><span class="nav-number">9.</span> <span class="nav-text">Bandit Level 30 → Level 31</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-8"><span class="nav-number">9.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-31-→-Level-32"><span class="nav-number">10.</span> <span class="nav-text">Bandit Level 31 → Level 32</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-9"><span class="nav-number">10.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-32-→-Level-33"><span class="nav-number">11.</span> <span class="nav-text">Bandit Level 32 → Level 33</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Level-Goal-10"><span class="nav-number">11.1.</span> <span class="nav-text">Level Goal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bandit-Level-33-→-Level-34"><span class="nav-number">12.</span> <span class="nav-text">Bandit Level 33 → Level 34</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Seven ♂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2020/05/06/OvertheWire/Bandit22-34/';
+          this.page.identifier = '2020/05/06/OvertheWire/Bandit22-34/';
+          this.page.title = 'Bandit22-34';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://disqus_eaniNzpdiO.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
