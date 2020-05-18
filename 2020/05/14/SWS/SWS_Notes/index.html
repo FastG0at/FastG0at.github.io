@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sws," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. Buffer overflow1.3 Format String1.3.1 ConditionIF Attacker is able to provide the format string to an ANSI C format function, a format string vulnerability is present. 12345&#x2F;&#x2F;Wrong  he can control">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SWS_Notes">
+<meta property="og:url" content="http://yoursite.com/2020/05/14/SWS/SWS_Notes/index.html">
+<meta property="og:site_name" content="Seven&#39;s blog">
+<meta property="og:description" content="1. Buffer overflow1.3 Format String1.3.1 ConditionIF Attacker is able to provide the format string to an ANSI C format function, a format string vulnerability is present. 12345&#x2F;&#x2F;Wrong  he can control">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-14T08:44:09.000Z">
+<meta property="article:modified_time" content="2020-05-15T01:05:57.085Z">
+<meta property="article:author" content="Seven ♂">
+<meta property="article:tag" content="sws">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"bounceIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/14/SWS/SWS_Notes/"/>
+
+
+
+
+
+  <title>SWS_Notes | Seven's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Seven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/SWS/SWS_Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SWS_Notes</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-14T10:44:09+02:00">
+                2020-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/theory/" itemprop="url" rel="index">
+                    <span itemprop="name">theory</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-Buffer-overflow"><a href="#1-Buffer-overflow" class="headerlink" title="1. Buffer overflow"></a>1. Buffer overflow</h1><h2 id="1-3-Format-String"><a href="#1-3-Format-String" class="headerlink" title="1.3 Format String"></a>1.3 Format String</h2><h3 id="1-3-1-Condition"><a href="#1-3-1-Condition" class="headerlink" title="1.3.1 Condition"></a>1.3.1 Condition</h3><p>IF Attacker is able to provide the format string to an ANSI C format function, a format string vulnerability is present.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Wrong  he can control the entire ASCIIZ-string</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span> <span class="params">(<span class="keyword">char</span> *user)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">printf</span> (user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Correct</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span> <span class="params">(<span class="keyword">char</span> *user)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">printf</span> (<span class="string">"%s"</span>, user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-2-Format-family"><a href="#1-3-2-Format-family" class="headerlink" title="1.3.2 Format family"></a>1.3.2 Format family</h3><ul>
+<li>fprint - prints to a FILE stream</li>
+<li>print  - prints to the ‘stdout’ stream</li>
+<li>sprintf - prints into a string</li>
+<li>snprintf - prints into a string with length checking</li>
+</ul>
+<p>some relatives:</p>
+<ul>
+<li>setproctitle - set argv[]</li>
+<li>syslog - output to the syslog facility</li>
+<li>others like err<em>, verr</em>, vwarn*</li>
+</ul>
+<h3 id="1-3-3-What-is-a-format-string"><a href="#1-3-3-What-is-a-format-string" class="headerlink" title="1.3.3 What is a format string?"></a>1.3.3 What is a format string?</h3><p>A fortmat string is an ASCIIZ string that contains text and format parameter.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> (<span class="string">"The magic number is: \x25d\n"</span>, <span class="number">23</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Above code works because 0x25 is the %, and \ symbol is something try to interprete the special characters for compiler.</p>
+<h2 id="2-1-what-are-we-able-to-control"><a href="#2-1-what-are-we-able-to-control" class="headerlink" title="2.1 what are we able to control"></a>2.1 what are we able to control</h2><h3 id="2-1-1-Crach-of-the-program"><a href="#2-1-1-Crach-of-the-program" class="headerlink" title="2.1.1 Crach of the program"></a>2.1.1 Crach of the program</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%s%s%s%s%s%s%s%s%s%s%s%s"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Since %s displays memory from an address that is supplied on the stack.展示的是stack地址上所表征的字符串。</p>
+<table>
+<thead>
+<tr>
+<th>parameter</th>
+<th>output</th>
+<th>passed as</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%s</td>
+<td>string</td>
+<td>reference</td>
+</tr>
+<tr>
+<td>%n</td>
+<td>number of bytes written so far</td>
+<td>reference</td>
+</tr>
+</tbody></table>
+<p>我们很有可能拿到illegal address，就是没有map任何memory，%n也是同样的道理，因此我们重复使用多次之后，就可以保证crash is present.</p>
+<p>2.1.2 Viewing the process memory 查看进程的记忆体</p>
+<p>利用format function - 各类printf及其亲属的打印功能，可以查看很多information</p>
+<p>####2.1.3Viewing the stack</p>
+<p>查看format string:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%08x.%08x\n"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>From bottom upward to the top of the stack - assuming the stack grows towards the low addresses</p>
+<p>到底是指看哪里的数据？？？</p>
+<h3 id="2-1-4-View-memory-at-any-location"><a href="#2-1-4-View-memory-at-any-location" class="headerlink" title="2.1.4 View memory at any location"></a>2.1.4 View memory at any location</h3><p>指哪里看哪里!</p>
+<p>Tthis poses 2 problems to us: First, we have to find a format parameter which uses an address as stack parameter and displays memory from there, and we have to supply the address. 首先我们需要找到format参数，Which用地址作为stack参数并且从那儿显示记忆体（大哥这不就是char * - %s 这种变量吗）, 另外，我们需要提供地址。%s提供这种功能，通常显示ASCIIZ 字符串， 所以还剩下一个问题，如何拿到stack上的地址（suppose to be the address which we want to know）, into the right place.</p>
+<h3 id="2-1-5-Overwriting-of-arbitrary-memory"><a href="#2-1-5-Overwriting-of-arbitrary-memory" class="headerlink" title="2.1.5 Overwriting of arbitrary memory"></a>2.1.5 Overwriting of arbitrary memory</h3><p>The holy grail of expoitation is to take control of the instruction pointer of a process.<br>IP or also called PC(Instruction pointer) is a register in the CPU and cannot be modified directly, only machine instructions can change it.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sws/" rel="tag"># sws</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/13/Schreiben/" rel="next" title="Schreiben">
+                <i class="fa fa-chevron-left"></i> Schreiben
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/15/SWS/Submission03/" rel="prev" title="Submission03 of SWS">
+                Submission03 of SWS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.JPG"
+                alt="Seven ♂" />
+            
+              <p class="site-author-name" itemprop="name">Seven ♂</p>
+              <p class="site-description motion-element" itemprop="description">Try harder</p>
+          </div>
+
+	<div id="music163player">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=120 src="//music.163.com/outchain/player?type=0&id=5004636762&auto=0&height=430"></iframe>
+	</div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/FastG0at" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:st164478@stud.uni-stuttgart.de" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Buffer-overflow"><span class="nav-number">1.</span> <span class="nav-text">1. Buffer overflow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Format-String"><span class="nav-number">1.1.</span> <span class="nav-text">1.3 Format String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-Condition"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.3.1 Condition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Format-family"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.3.2 Format family</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-What-is-a-format-string"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3.3 What is a format string?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-what-are-we-able-to-control"><span class="nav-number">1.2.</span> <span class="nav-text">2.1 what are we able to control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-Crach-of-the-program"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1.1 Crach of the program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-4-View-memory-at-any-location"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.1.4 View memory at any location</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-5-Overwriting-of-arbitrary-memory"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.1.5 Overwriting of arbitrary memory</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Seven ♂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2020/05/14/SWS/SWS_Notes/';
+          this.page.identifier = '2020/05/14/SWS/SWS_Notes/';
+          this.page.title = 'SWS_Notes';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://disqus_eaniNzpdiO.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Submission01 of SWSXusong Wang 3375907Huicheng Qian 3443114Shkodran Abdullahu 3466256关闭了所有的优化选项,否则的话想problem 1中的部分变量都会被优化掉. The order of declaration will determine the order of stack. NOT initializati">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SWS&#x2F;Submission01_en">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/SWS/Submission01_en/index.html">
+<meta property="og:site_name" content="Seven&#39;s blog">
+<meta property="og:description" content="Submission01 of SWSXusong Wang 3375907Huicheng Qian 3443114Shkodran Abdullahu 3466256关闭了所有的优化选项,否则的话想problem 1中的部分变量都会被优化掉. The order of declaration will determine the order of stack. NOT initializati">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/home/xusong/.config/Typora/typora-user-images/image-20200502005204664.png">
+<meta property="og:image" content="http://yoursite.com/home/xusong/.config/Typora/typora-user-images/image-20200501212219103.png">
+<meta property="og:image" content="http://yoursite.com/home/xusong/.config/Typora/typora-user-images/image-20200503091753665.png">
+<meta property="og:image" content="http://yoursite.com/home/xusong/.config/Typora/typora-user-images/image-20200504002751333.png">
+<meta property="og:image" content="http://yoursite.com/home/xusong/.config/Typora/typora-user-images/image-20200504002617049.png">
+<meta property="og:image" content="http://yoursite.com/home/xusong/.config/Typora/typora-user-images/image-20200504001834021.png">
+<meta property="article:published_time" content="2020-05-15T23:45:24.163Z">
+<meta property="article:modified_time" content="2020-05-09T18:00:06.000Z">
+<meta property="article:author" content="Seven ♂">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/home/xusong/.config/Typora/typora-user-images/image-20200502005204664.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"bounceIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/16/SWS/Submission01_en/"/>
+
+
+
+
+
+  <title>SWS/Submission01_en | Seven's blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Seven's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/SWS/Submission01_en/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SWS/Submission01_en</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T01:45:24+02:00">
+                2020-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Submission01-of-SWS"><a href="#Submission01-of-SWS" class="headerlink" title="Submission01 of SWS"></a>Submission01 of SWS</h2><h2 id="Xusong-Wang-3375907"><a href="#Xusong-Wang-3375907" class="headerlink" title="Xusong Wang 3375907"></a>Xusong Wang 3375907</h2><h2 id="Huicheng-Qian-3443114"><a href="#Huicheng-Qian-3443114" class="headerlink" title="Huicheng Qian 3443114"></a>Huicheng Qian 3443114</h2><h2 id="Shkodran-Abdullahu-3466256"><a href="#Shkodran-Abdullahu-3466256" class="headerlink" title="Shkodran Abdullahu 3466256"></a>Shkodran Abdullahu 3466256</h2><p>关闭了所有的优化选项,否则的话想problem 1中的部分变量都会被优化掉.</p>
+<p>The order of declaration will determine the order of stack. NOT initialization.</p>
+<ul>
+<li>When do we need movl rahter than mov : </li>
+<li>ebp:frame pointer</li>
+<li>ecx: 可能谁需要呢?ecx</li>
+</ul>
+<h4 id="Problem-1-Disassembling-with-gdb"><a href="#Problem-1-Disassembling-with-gdb" class="headerlink" title="Problem 1: Disassembling with gdb"></a>Problem 1: Disassembling with gdb</h4><ol>
+<li>Replace X in Line 5 with the sum of the ASCII codes.</li>
+</ol>
+<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200502005204664.png" alt="image-20200502005204664"></p>
+<ol start="2">
+<li>Compiling and disassembing with gdb</li>
+</ol>
+<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200501212219103.png" alt="image-20200501212219103"></p>
+<ol start="3">
+<li>Retrieve the assembly code of the main function, the corresponding assembly code are commented.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">0x08048344 &lt;+0&gt;:	    lea    0x4(%esp),%ecx	</span><br><span class="line">0x08048348 &lt;+4&gt;:	    and    $0xfffffff0,%esp #这是不可逆的哦,所以之前的东西要保存</span><br><span class="line">0x0804834b &lt;+7&gt;:	    pushl  -0x4(%ecx)		#之前esp上的数据</span><br><span class="line">0x0804834e &lt;+10&gt;:	push   %ebp				</span><br><span class="line">0x0804834f &lt;+11&gt;:	mov    %esp,%ebp		</span><br><span class="line">0x08048351 &lt;+13&gt;:	push   %ecx				#回火, 为什么要存,因为只有他有之前esp的信息了</span><br><span class="line">0x08048352 &lt;+14&gt;:	sub    $0x10,%esp		</span><br><span class="line">0x08048355 &lt;+17&gt;:	movl   $0xf3,-0x10(%ebp);Refer to line5 a&#x3D;0xf3;</span><br><span class="line">												;Move value of a to -0x10@(%ebp)</span><br><span class="line">0x0804835c &lt;+24&gt;:	movl   $0x3,-0xc(%ebp)	;Refer to Line6 b&#x3D;3;</span><br><span class="line">0x08048363 &lt;+31&gt;:	mov    -0xc(%ebp),%eax	;Refer to Line7 temp &#x3D; b;</span><br><span class="line">0x08048366 &lt;+34&gt;:	add    -0x10(%ebp),%eax	;Refer to Line7 temp &#x3D; temp+a;</span><br><span class="line">0x08048369 &lt;+37&gt;:	mov    %eax,-0x8(%ebp)	;Refer to Line7 c &#x3D; temp;</span><br><span class="line">0x0804836c &lt;+40&gt;:	mov    $0x0,%eax		</span><br><span class="line">0x08048371 &lt;+45&gt;:	add    $0x10,%esp</span><br><span class="line">0x08048374 &lt;+48&gt;:	pop    %ecx</span><br><span class="line">0x08048375 &lt;+49&gt;:	pop    %ebp</span><br><span class="line">0x08048376 &lt;+50&gt;:	lea    -0x4(%ecx),%esp</span><br><span class="line">0x08048379 &lt;+53&gt;:	ret</span><br></pre></td></tr></table></figure>
+
+<h4 id="Problem-2-x86-Assembly-Code-I"><a href="#Problem-2-x86-Assembly-Code-I" class="headerlink" title="Problem 2: x86 Assembly Code (I)"></a>Problem 2: x86 Assembly Code (I)</h4><p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200503091753665.png" alt="image-20200503091753665"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function main:</span><br><span class="line">   0x080483b6 &lt;+0&gt;:		lea    0x4(%esp),%ecx	;copies address esp+4 to ecx</span><br><span class="line">   0x080483ba &lt;+4&gt;:		and    $0xfffffff0,%esp	;alignment</span><br><span class="line">   0x080483bd &lt;+7&gt;:		pushl  -0x4(%ecx)		;push value of @-0x4(%ecx) onto the stack</span><br><span class="line">   0x080483c0 &lt;+10&gt;:	push   %ebp				;save current frame pointer</span><br><span class="line">   0x080483c1 &lt;+11&gt;:	mov    %esp,%ebp		;set %ebp&#x3D;%esp, new frame pointer</span><br><span class="line">   0x080483c3 &lt;+13&gt;:	push   %ecx				;allocate 4 bytes space for local variable</span><br><span class="line">   0x080483c4 &lt;+14&gt;:	sub    $0x14,%esp		;allocate space for local variables</span><br><span class="line">   0x080483c7 &lt;+17&gt;:	movl   $0x0,-0x8(%ebp)	;int x&#x3D; 0</span><br><span class="line">   0x080483ce &lt;+24&gt;:	mov    -0x8(%ebp),%eax	;moves x&#x3D;0 to %eax</span><br><span class="line">   0x080483d1 &lt;+27&gt;:	mov    %eax,(%esp)		;moves x&#x3D;0 @0x0(%esp)</span><br><span class="line">   0x080483d4 &lt;+30&gt;:	call   0x8048374 &lt;myfunction&gt;;call myfunction()</span><br><span class="line">   0x080483d9 &lt;+35&gt;:	add    $0x14,%esp		;esp+0x14</span><br><span class="line">   0x080483dc &lt;+38&gt;:	pop    %ecx				;pop %ecx</span><br><span class="line">   0x080483dd &lt;+39&gt;:	pop    %ebp				;pop %ebp</span><br><span class="line">   0x080483de &lt;+40&gt;:	lea    -0x4(%ecx),%esp	;copies address ecx-4 to esp</span><br><span class="line">   0x080483e1 &lt;+43&gt;:	ret    					;pop %ebp</span><br><span class="line">End of assembler dump.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Dump of assembler code for function myfunction:</span><br><span class="line">   0x08048374 &lt;+0&gt;:		push   %ebp					;save current frame pointer</span><br><span class="line">   0x08048375 &lt;+1&gt;:		mov    %esp,%ebp			;set %ebp&#x3D;%esp, new frame pointer</span><br><span class="line">   0x08048377 &lt;+3&gt;:		sub    $0x28,%esp			;allocate space for local variables</span><br><span class="line">   0x0804837a &lt;+6&gt;:		movl   $0x2a,-0x4(%ebp)		;some_long:&#x3D; 42</span><br><span class="line">   0x08048381 &lt;+13&gt;:	movl   $0x80484b0,-0xc(%ebp);some_strings[0] &#x3D; &quot;foo&quot;</span><br><span class="line">   0x08048388 &lt;+20&gt;:	movl   $0x80484b4,-0x8(%ebp);some_strings[1] &#x3D; &quot;bar&quot;</span><br><span class="line">   0x0804838f &lt;+27&gt;:	subl   $0x13,-0x4(%ebp)		;some_long -&#x3D; 19;</span><br><span class="line">   0x08048393 &lt;+31&gt;:	mov    -0xc(%ebp),%eax		;%eax:&#x3D;some_strings[0] </span><br><span class="line">   0x08048396 &lt;+34&gt;:	mov    %eax,0xc(%esp)		;mov some_strings[0] @0xc(%esp)</span><br><span class="line">   													;as argument for the &lt;printf&gt;</span><br><span class="line">   0x0804839a &lt;+38&gt;:	mov    0x8(%ebp),%eax		;move argument int a to %eax</span><br><span class="line">   0x0804839d &lt;+41&gt;:	mov    %eax,0x8(%esp)		;move int a @0x8(%esp) for printf</span><br><span class="line">   0x080483a1 &lt;+45&gt;:	mov    -0x4(%ebp),%eax		;move some_long to %eax</span><br><span class="line">   0x080483a4 &lt;+48&gt;:	mov    %eax,0x4(%esp)		;move eax 0x4(%esp for printf</span><br><span class="line">   0x080483a8 &lt;+52&gt;:	movl   $0x80484b8,(%esp)	;pass the address of strng to printf</span><br><span class="line">   0x080483af &lt;+59&gt;:	call   0x80482d8 &lt;printf@plt&gt;;printf</span><br><span class="line">   0x080483b4 &lt;+64&gt;:	leave  						;%esp :&#x3D;ebp%</span><br><span class="line">   0x080483b5 &lt;+65&gt;:	ret    						;pop %ebp</span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Problem-3-x86-Assembly-Code-II"><a href="#Problem-3-x86-Assembly-Code-II" class="headerlink" title="Problem 3: x86 Assembly Code (II)"></a>Problem 3: x86 Assembly Code (II)</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">blub</span><span class="params">()</span></span>;</span><br><span class="line">    blub();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">blub</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">0x17</span>;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    b = a - <span class="number">0xf</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Problem-4-Two’s-Complement"><a href="#Problem-4-Two’s-Complement" class="headerlink" title="Problem 4: Two’s Complement"></a>Problem 4: Two’s Complement</h4><p>  Attachment below is the source file of this problem.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="comment">//#include &lt;conio.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">print_bin</span><span class="params">(<span class="keyword">int</span> n)</span></span>;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> s_unsigned;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> s_unsigned_b;</span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> s_signed;  </span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> s_signed_b;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> x;<span class="comment">//  int x[3]=&#123;'X','H','S'&#125;;</span></span><br><span class="line">  x=<span class="string">'X'</span>+<span class="string">'H'</span>+<span class="string">'S'</span>;</span><br><span class="line">  s_unsigned=x%<span class="number">127</span>+<span class="number">128</span>;</span><br><span class="line">  s_signed=x%<span class="number">127</span>+<span class="number">128</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The value of x is %d\n"</span>,x);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The value of s_unsigned is %d\n"</span>,s_unsigned);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The value of s_signed is %d\n"</span>,s_signed);</span><br><span class="line">  print_bin(s_unsigned);</span><br><span class="line">  print_bin(s_signed);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_bin</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="keyword">sizeof</span>(n)*<span class="number">4</span><span class="number">-1</span>; i&gt;=<span class="number">0</span>; i --)<span class="comment">//Attention in ANSI C - sizeof(char) is 1</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n&amp;(<span class="number">1</span>&lt;&lt;i))<span class="built_in">printf</span>(<span class="string">"1"</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"0"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Consuming the representation type of the variables is int, whose size is 16 or 32 bits normally , 16 bits in my case.</p>
+<p>The value of x is 243<br>The value of s_unsigned is 244<br>The value of s_signed is 244<br>0000000011110100(Binary representation of s_unsigned )<br>0000000011110100(Binary representation of s_signed )</p>
+</li>
+<li><p>Consuming the representation type of the variables is  short, whose size is 8 bits normally.</p>
+<p>The value of x is 243<br>The value of s_unsigned is 244<br>The value of s_signed is -12<br>11110100(Binary representation of s_unsigned )<br>11110100(Binary representation of s_signed)<br>Unsigned interpretation: $244 = -12 \ mod \ 2^8 = 2^8 - 12$</p>
+</li>
+</ul>
+<h3 id="Problem-5-Buffer-Overflow"><a href="#Problem-5-Buffer-Overflow" class="headerlink" title="Problem 5: Buffer Overflow"></a>Problem 5: Buffer Overflow</h3><p>The result of the given script is shown as below:</p>
+<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200504002751333.png" alt="image-20200504002751333"></p>
+<p>A string  is printed: undvier</p>
+<p>There are several reasons about the solution:</p>
+<ol>
+<li><p>The strcpy(arg1,arg2) may copy the string from arg2 to arg1, until /0 is detected</p>
+<p>part of source code of strcpy()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">const</span> <span class="keyword">char</span> *src)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> i;</span><br><span class="line">  <span class="keyword">for</span> (i=<span class="number">0</span>; src[i] != <span class="string">'\0'</span>; ++i)</span><br><span class="line">    dest[i] = src[i];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//Ensure trailing null byte is copied</span></span><br><span class="line">  dest[i]= <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In our case </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> foo[] = <span class="string">"zweiundvier\0zig"</span></span><br></pre></td></tr></table></figure>
+
+<p>so only “zweiundvier” are copied in the process of operation</p>
+<ol start="2">
+<li>buffer2 is too small to capture “zweiundvier”, buffer overflow happens, due to the definition of buffer1, buffer2 and buffer3 are conseqent, “zweiundvier” also cover the data segment of buffer1 and buffer2. And print function show the string until it print \0.</li>
+</ol>
+</li>
+</ol>
+<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200504002617049.png" alt="image-20200504002617049"></p>
+<p>​        In addition, if we print the buffer2 ,buffer3 , it should be:<br>​        buffer1 =’’ vier’, buffer2 = ‘undvier ‘, buffer3 = ‘zweiundvier’</p>
+<p>​     </p>
+<h3 id="Problem-6-Stack-Frames"><a href="#Problem-6-Stack-Frames" class="headerlink" title="Problem 6: Stack Frames"></a>Problem 6: Stack Frames</h3><p>Belwo is the disassembled code: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function main:</span><br><span class="line">   0x08048357 &lt;+0&gt;:		lea    0x4(%esp),%ecx</span><br><span class="line">   0x0804835b &lt;+4&gt;:		and    $0xfffffff0,%esp</span><br><span class="line">   0x0804835e &lt;+7&gt;:		pushl  -0x4(%ecx)</span><br><span class="line">   0x08048361 &lt;+10&gt;:	push   %ebp</span><br><span class="line">   0x08048362 &lt;+11&gt;:	mov    %esp,%ebp</span><br><span class="line">   0x08048364 &lt;+13&gt;:	push   %ecx</span><br><span class="line">   0x08048365 &lt;+14&gt;:	sub    $0x18,%esp</span><br><span class="line">   0x08048368 &lt;+17&gt;:	movl   $0x2a,-0x10(%ebp)</span><br><span class="line">   0x0804836f &lt;+24&gt;:	lea    -0x10(%ebp),%eax</span><br><span class="line">   0x08048372 &lt;+27&gt;:	mov    %eax,0x4(%esp)</span><br><span class="line">   0x08048376 &lt;+31&gt;:	movl   $0x17,(%esp)</span><br><span class="line">   0x0804837d &lt;+38&gt;:	call   0x8048344 &lt;do_something&gt;</span><br><span class="line">   0x08048382 &lt;+43&gt;:	add    $0x18,%esp</span><br><span class="line">   0x08048385 &lt;+46&gt;:	pop    %ecx</span><br><span class="line">   0x08048386 &lt;+47&gt;:	pop    %ebp</span><br><span class="line">   0x08048387 &lt;+48&gt;:	lea    -0x4(%ecx),%esp</span><br><span class="line">   0x0804838a &lt;+51&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br><span class="line">Dump of assembler code for function do_something:</span><br><span class="line">   0x08048344 &lt;+0&gt;:		push   %ebp</span><br><span class="line">   0x08048345 &lt;+1&gt;:		mov    %esp,%ebp</span><br><span class="line">   0x08048347 &lt;+3&gt;:		sub    $0x10,%esp	;end here?</span><br><span class="line">   0x0804834a &lt;+6&gt;:		mov    0xc(%ebp),%eax</span><br><span class="line">   0x0804834d &lt;+9&gt;:		mov    (%eax),%eax</span><br><span class="line">   0x0804834f &lt;+11&gt;:	add    0x8(%ebp),%eax</span><br><span class="line">   0x08048352 &lt;+14&gt;:	mov    %eax,-0x8(%ebp)</span><br><span class="line">   0x08048355 &lt;+17&gt;:	leave  </span><br><span class="line">   0x08048356 &lt;+18&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_something</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> * b)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> c;</span><br><span class="line">  <span class="keyword">int</span> d;</span><br><span class="line"></span><br><span class="line">  c = a + *b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> e;</span><br><span class="line">  <span class="keyword">int</span> f;</span><br><span class="line">  <span class="keyword">int</span> g;</span><br><span class="line"></span><br><span class="line">  e = <span class="number">42</span>;</span><br><span class="line">  </span><br><span class="line">  do_something(<span class="number">23</span>, &amp;e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(gdb) backtrace</span><br><span class="line"><span class="meta">#</span><span class="bash">0  do_something (a=23, b=0xffffcd98) at c-stack-example.c:5</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x08048382 <span class="keyword">in</span> main () at c-stack-example.c:15</span></span><br><span class="line">(gdb) info frame 0</span><br><span class="line">Stack frame at 0xffffcd8c:</span><br><span class="line"> eip = 0x804834a in do_something (c-stack-example.c:5); saved eip = 0x8048382</span><br><span class="line"> called by frame at 0xffffcdb0</span><br><span class="line"> source language c.</span><br><span class="line"> Arglist at 0xffffcd84, args: a=23, b=0xffffcd98</span><br><span class="line"> Locals at 0xffffcd84, Previous frame's sp is 0xffffcd8c</span><br><span class="line"> Saved registers:</span><br><span class="line">  ebp at 0xffffcd84, eip at 0xffffcd88</span><br><span class="line">  </span><br><span class="line">(gdb) info frame 1</span><br><span class="line">Stack frame at 0xffffcdb0:</span><br><span class="line"> eip = 0x8048382 in main (c-stack-example.c:15); saved eip = 0xf7e09637</span><br><span class="line"> caller of frame at 0xffffcd8c</span><br><span class="line"> source language c.</span><br><span class="line"> Arglist at 0xffffcda8, args: </span><br><span class="line"> Locals at 0xffffcda8, Previous frame's sp at 0xffffcda4</span><br><span class="line"> Saved registers:</span><br><span class="line">  ebp at 0xffffcda8, eip at 0xffffcdac</span><br></pre></td></tr></table></figure>
+
+<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200504001834021.png" alt="image-20200504001834021"></p>
+<p>Ofen used command: </p>
+<p>(gdb) break 5  //number of line in  code/c–stack–example.c</p>
+<p>(gdb) run</p>
+<p>(gdb) backtrace</p>
+<p>(gdb) select-frame 0</p>
+<p>(gdb) info frame</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/15/SWS/Submission02/" rel="next" title="Submission02 of SWS">
+                <i class="fa fa-chevron-left"></i> Submission02 of SWS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.JPG"
+                alt="Seven ♂" />
+            
+              <p class="site-author-name" itemprop="name">Seven ♂</p>
+              <p class="site-description motion-element" itemprop="description">Try harder</p>
+          </div>
+
+	<div id="music163player">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=120 src="//music.163.com/outchain/player?type=0&id=5004636762&auto=0&height=430"></iframe>
+	</div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/FastG0at" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:st164478@stud.uni-stuttgart.de" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Submission01-of-SWS"><span class="nav-number">1.</span> <span class="nav-text">Submission01 of SWS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Xusong-Wang-3375907"><span class="nav-number">2.</span> <span class="nav-text">Xusong Wang 3375907</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Huicheng-Qian-3443114"><span class="nav-number">3.</span> <span class="nav-text">Huicheng Qian 3443114</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shkodran-Abdullahu-3466256"><span class="nav-number">4.</span> <span class="nav-text">Shkodran Abdullahu 3466256</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem-1-Disassembling-with-gdb"><span class="nav-number">4.0.1.</span> <span class="nav-text">Problem 1: Disassembling with gdb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem-2-x86-Assembly-Code-I"><span class="nav-number">4.0.2.</span> <span class="nav-text">Problem 2: x86 Assembly Code (I)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem-3-x86-Assembly-Code-II"><span class="nav-number">4.0.3.</span> <span class="nav-text">Problem 3: x86 Assembly Code (II)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem-4-Two’s-Complement"><span class="nav-number">4.0.4.</span> <span class="nav-text">Problem 4: Two’s Complement</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-5-Buffer-Overflow"><span class="nav-number">4.1.</span> <span class="nav-text">Problem 5: Buffer Overflow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-6-Stack-Frames"><span class="nav-number">4.2.</span> <span class="nav-text">Problem 6: Stack Frames</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Seven ♂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2020/05/16/SWS/Submission01_en/';
+          this.page.identifier = '2020/05/16/SWS/Submission01_en/';
+          this.page.title = 'SWS/Submission01_en';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://disqus_eaniNzpdiO.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
