@@ -332,7 +332,7 @@
       
         
           
-            <h2 id="Submission01-of-SWS"><a href="#Submission01-of-SWS" class="headerlink" title="Submission01 of SWS"></a>Submission01 of SWS</h2><h2 id="Xusong-Wang-3375907"><a href="#Xusong-Wang-3375907" class="headerlink" title="Xusong Wang 3375907"></a>Xusong Wang 3375907</h2><h2 id="Huicheng-Qian-3443114"><a href="#Huicheng-Qian-3443114" class="headerlink" title="Huicheng Qian 3443114"></a>Huicheng Qian 3443114</h2><h2 id="Shkodran-Abdullahu-3466256"><a href="#Shkodran-Abdullahu-3466256" class="headerlink" title="Shkodran Abdullahu 3466256"></a>Shkodran Abdullahu 3466256</h2><p>关闭了所有的优化选项,否则的话想problem 1中的部分变量都会被优化掉.</p>
+            <h2 id="Submission01-of-SWS"><a href="#Submission01-of-SWS" class="headerlink" title="Submission01 of SWS"></a>Submission01 of SWS</h2><p>关闭了所有的优化选项,否则的话想problem 1中的部分变量都会被优化掉.</p>
 <p>The order of declaration will determine the order of stack. NOT initialization.</p>
 <ul>
 <li>When do we need movl rahter than mov : </li>
@@ -549,7 +549,7 @@
       
         
           
-            <h2 id="Submission02-of-SWS"><a href="#Submission02-of-SWS" class="headerlink" title="Submission02 of SWS"></a>Submission02 of SWS</h2><h2 id="Xusong-Wang-3375907"><a href="#Xusong-Wang-3375907" class="headerlink" title="Xusong Wang 3375907"></a>Xusong Wang 3375907</h2><h2 id="Huicheng-Qian-3443114"><a href="#Huicheng-Qian-3443114" class="headerlink" title="Huicheng Qian 3443114"></a>Huicheng Qian 3443114</h2><h2 id="Shkodran-Abdullahu-3466256"><a href="#Shkodran-Abdullahu-3466256" class="headerlink" title="Shkodran Abdullahu 3466256"></a>Shkodran Abdullahu 3466256</h2><p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066163/Screenshot_from_2020-05-10_01-14-58_jwd7vo.png" alt=""></p>
+            <h2 id="Submission02-of-SWS"><a href="#Submission02-of-SWS" class="headerlink" title="Submission02 of SWS"></a>Submission02 of SWS</h2><p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066163/Screenshot_from_2020-05-10_01-14-58_jwd7vo.png" alt=""></p>
 <p>We mimic the way from the example of lectures, insert a printf() as an assistant.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">callme</span><span class="params">(<span class="keyword">char</span> *a)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">char</span> b[<span class="number">255</span>];</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Address of buffer in exploitable program: %08x\n"</span>, b); <span class="comment">//edited </span></span><br><span class="line">  <span class="built_in">strcpy</span>(b, a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
